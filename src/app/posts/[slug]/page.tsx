@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getPostBySlug, getAllPosts, formatDate, readingMin } from '@/lib/posts';
 import { href, siteUrl } from '@/lib/url';
+import DisqusComments from '@/components/DisqusComments';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -97,6 +98,8 @@ export default async function PostPage({ params }: Props) {
             &larr; Back to all posts
           </Link>
         </div>
+
+        <DisqusComments />
       </article>
     </>
   );
