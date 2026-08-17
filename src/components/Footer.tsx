@@ -87,9 +87,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-400 dark:text-gray-500">
-          <p>{new Date().getFullYear()} aixwim.dev</p>
-          <p className="text-xs text-gray-400 dark:text-gray-600">Dibangun dengan Next.js</p>
+        <div className="mt-12 pt-6 border-t border-gray-100 dark:border-gray-800 text-center sm:text-left">
+          <p className="text-sm text-gray-400 dark:text-gray-500">{new Date().getFullYear()} aixwim.dev</p>
         </div>
       </div>
     </footer>
