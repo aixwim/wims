@@ -23,45 +23,118 @@
     --tw-prose-pre-code: theme(colors.gray.200);
   }
 
+  /* Paragraph spacing */
+  .prose p {
+    @apply leading-[1.8] mb-6;
+  }
+
+  /* Heading spacing */
+  .prose h1 {
+    @apply mt-0 mb-6;
+  }
+  .prose h2 {
+    @apply mt-14 mb-5 text-[1.5rem];
+  }
+  .prose h3 {
+    @apply mt-10 mb-4 text-[1.25rem];
+  }
+  .prose h4 {
+    @apply mt-8 mb-3 text-[1.1rem];
+  }
+
+  /* Lists */
+  .prose ul {
+    @apply my-6 space-y-3;
+  }
+  .prose ol {
+    @apply my-6 space-y-3;
+  }
+  .prose li {
+    @apply leading-[1.8];
+  }
+  .prose li::marker {
+    @apply text-blue-500 dark:text-blue-400;
+  }
+  .prose ul > li {
+    @apply pl-1;
+  }
+  .prose ul > li::before {
+    @apply bg-blue-500 dark:bg-blue-400;
+    width: 6px;
+    height: 6px;
+    top: 0.75em;
+  }
+
+  /* Code blocks */
   .prose pre {
-    @apply rounded-lg border border-gray-200 dark:border-gray-700;
+    @apply rounded-xl border border-gray-200 dark:border-gray-700 my-8 text-sm leading-relaxed;
+  }
+  .prose pre code {
+    @apply bg-transparent p-0 text-sm;
   }
 
+  /* Inline code */
   .prose code:not(pre code) {
-    @apply bg-gray-100 dark:bg-gray-800 text-pink-600 dark:text-pink-400 px-1.5 py-0.5 rounded text-sm font-medium;
+    @apply bg-gray-100 dark:bg-gray-800 text-pink-600 dark:text-pink-400 px-1.5 py-0.5 rounded-md text-[0.85em] font-medium;
   }
-
   .prose code:not(pre code)::before,
   .prose code:not(pre code)::after {
     content: none;
   }
 
+  /* Blockquote */
   .prose blockquote {
-    @apply border-l-blue-500 bg-blue-50 dark:bg-blue-900/20 py-1 px-4 rounded-r-lg;
+    @apply border-l-4 border-blue-500 bg-blue-50/50 dark:bg-blue-900/10 py-4 px-5 rounded-r-xl my-8 italic;
+  }
+  .prose blockquote p {
+    @apply mb-0 text-gray-600 dark:text-gray-300;
   }
 
-  .prose img {
-    @apply rounded-lg;
-  }
-
+  /* Links */
   .prose a {
-    @apply underline decoration-blue-300 dark:decoration-blue-700 underline-offset-2 hover:decoration-blue-500 transition-colors;
+    @apply font-medium underline decoration-blue-300 dark:decoration-blue-700 decoration-2 underline-offset-2 hover:decoration-blue-500 transition-colors;
   }
 
+  /* Images */
+  .prose img {
+    @apply rounded-xl my-8;
+  }
+
+  /* Horizontal rule */
   .prose hr {
-    @apply border-gray-200 dark:border-gray-700;
+    @apply border-gray-200 dark:border-gray-700 my-12;
   }
 
+  /* Tables */
   .prose table {
-    @apply text-sm;
+    @apply text-sm my-8 w-full;
+  }
+  .prose thead {
+    @apply border-b-2 border-gray-200 dark:border-gray-700;
+  }
+  .prose th {
+    @apply bg-gray-50 dark:bg-gray-800/80 font-semibold text-gray-900 dark:text-white py-3 px-4 text-left;
+  }
+  .prose td {
+    @apply py-3 px-4;
+  }
+  .prose tbody tr {
+    @apply border-b border-gray-100 dark:border-gray-800;
+  }
+  .prose tbody tr:last-child {
+    @apply border-b-0;
+  }
+  .prose tbody tr:hover {
+    @apply bg-gray-50/50 dark:bg-gray-800/30;
   }
 
-  .prose th {
-    @apply bg-gray-50 dark:bg-gray-800;
+  /* Strong */
+  .prose strong {
+    @apply font-semibold text-gray-900 dark:text-white;
   }
 
-  .prose td,
-  .prose th {
-    @apply border-gray-200 dark:border-gray-700;
+  /* Em */
+  .prose em {
+    @apply text-gray-600 dark:text-gray-300;
   }
 }
