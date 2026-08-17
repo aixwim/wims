@@ -1,12 +1,12 @@
 {
-  "name": "aixwim — Blog",
+  "name": "aixwim — Blog Teknologi & Web Development",
   "short_name": "aixwim",
-  "description": "Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.",
+  "description": "Blog pribadi aixwim tentang teknologi, pengembangan web, SEO, dan catatan harian.",
   "start_url": "/wims/",
   "scope": "/wims/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#2563eb",
+  "theme_color": "#6366f1",
   "orientation": "portrait-primary",
   "icons": [
     {

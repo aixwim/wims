@@ -27,27 +27,40 @@ export default async function TagPage({ params }: Props) {
   if (posts.length === 0) notFound();
 
   return (
-    <section>
-      <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">#{tag}</h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">{posts.length} articles</p>
-      <div className="space-y-8">
-        {posts.map((post) => (
-          <article key={post.slug} className="group">
-            <Link href={href(`/posts/${post.slug}/`)} prefetch={false} className="block">
-              <p className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-1">{formatDate(post.date)}</p>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
-                {post.title}
-              </h2>
-              {post.excerpt && (
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">{post.excerpt}</p>
-              )}
-            </Link>
-          </article>
+    <section className="max-w-screen-md">
+      <header className="mb-10">
+        <span className="badge bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-300 mb-4">Tag</span>
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
+          #{tag}
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400">{posts.length} artikel dengan tag ini.</p>
+      </header>
+
+      <div className="space-y-2">
+        {posts.map((post, i) => (
+          <Link
+            key={post.slug}
+            href={href(`/posts/${post.slug}/`)}
+            prefetch={false}
+            className={`group flex items-baseline gap-4 rounded-xl px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900 ${i !== posts.length - 1 ? 'border-b border-gray-100 dark:border-gray-800' : ''}`}
+          >
+            <time className="text-xs text-gray-400 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
+              {formatDate(post.date)}
+            </time>
+            <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
+              {post.title}
+            </span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 ml-auto text-gray-300 dark:text-gray-600 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all shrink-0" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </Link>
         ))}
       </div>
-      <div className="mt-8">
-        <Link href={href('/tags/')} className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors">
-          &larr; All tags
+
+      <div className="mt-10">
+        <Link href={href('/tags/')} prefetch={false} className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-300 hover:underline underline-offset-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+          Semua tag
         </Link>
       </div>
     </section>

@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import { canonicalUrl } from '@/lib/url';
 
 export const metadata: Metadata = {
-  title: 'Search',
-  description: 'Cari artikel di blog aixwim.',
+  title: 'Cari Artikel',
+  description: 'Cari dan temukan artikel tentang web development, SEO, teknologi, dan tips di blog aixwim.',
   alternates: { canonical: canonicalUrl('/search/') },
 };
 
@@ -16,11 +16,20 @@ export default function SearchPage() {
     title: p.title,
     excerpt: p.excerpt,
     tags: p.tags,
+    date: p.date,
   }));
 
   return (
-    <section>
-      <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">Search</h1>
+    <section className="max-w-screen-md mx-auto">
+      <header className="mb-8">
+        <span className="badge bg-cyan-50 text-cyan-600 dark:bg-cyan-900/30 dark:text-cyan-300 mb-4">Pencarian</span>
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
+          Cari Artikel
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400">
+          Ketik kata kunci untuk menemukan artikel yang kamu butuhkan.
+        </p>
+      </header>
       <SearchInner searchIndex={searchIndex} />
     </section>
   );

@@ -62,7 +62,7 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2 text-gray-400 hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+          className="p-2 text-gray-400 hover:text-indigo-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
           aria-label={`Share on ${link.name}`}
         >
           {link.icon}
@@ -70,7 +70,7 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
       ))}
       <button
         onClick={copyToClipboard}
-        className="p-2 text-gray-400 hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+        className="p-2 text-gray-400 hover:text-indigo-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
         aria-label={copied ? 'Link disalin' : 'Copy link'}
         title={copied ? 'Link disalin!' : 'Copy link'}
       >

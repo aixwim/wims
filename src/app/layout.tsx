@@ -8,38 +8,49 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    { media: '(prefers-color-scheme: dark)', color: '#020617' },
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
   ],
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl + basePath),
   title: {
-    default: 'aixwim — Blog',
+    default: 'aixwim — Blog Teknologi & Web Development',
     template: '%s | aixwim',
   },
-  description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.',
-  metadataBase: new URL(siteUrl + basePath),
+  description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, SEO, dan catatan harian.',
+  keywords: ['blog', 'teknologi', 'web development', 'nextjs', 'seo', 'aixwim'],
+  authors: [{ name: 'aixwim', url: absoluteUrl('/about/') }],
+  creator: 'aixwim',
+  publisher: 'aixwim',
+  formatDetection: { telephone: false },
   openGraph: {
     type: 'website',
     siteName: 'aixwim',
     locale: 'id_ID',
+    url: absoluteUrl('/'),
+    title: 'aixwim — Blog Teknologi & Web Development',
+    description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, SEO, dan catatan harian.',
     images: [
       {
         url: absoluteUrl('/og.png'),
         width: 1200,
         height: 630,
-        alt: 'aixwim Blog',
+        alt: 'aixwim — Blog Teknologi & Web Development',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@aixwim',
+    title: 'aixwim — Blog Teknologi & Web Development',
+    description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, SEO, dan catatan harian.',
+    images: [absoluteUrl('/og.png')],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
   },
   alternates: {
     types: {
@@ -47,19 +58,28 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: basePath + '/favicon.svg',
+    icon: [
+      { url: basePath + '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: basePath + '/favicon.svg', sizes: '180x180' }],
   },
+  manifest: basePath + '/manifest.json',
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'aixwim',
+  alternateName: 'aixwim Blog',
   url: absoluteUrl('/'),
-  description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.',
+  description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, SEO, dan catatan harian.',
+  inLanguage: 'id-ID',
   publisher: {
     '@type': 'Person',
     name: 'aixwim',
+    url: absoluteUrl('/about/'),
+    email: 'mailto:hello@aixwim.dev',
+    sameAs: ['https://github.com/aixwim'],
   },
   potentialAction: {
     '@type': 'SearchAction',
@@ -75,24 +95,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
-        <link rel="manifest" href={basePath + '/manifest.json'} />
         <link rel="dns-prefetch" href="https://aixwim.disqus.com" />
         <link rel="preconnect" href="https://aixwim.disqus.com" crossOrigin="anonymous" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {
             var t = localStorage.getItem('theme');
-            if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-              document.documentElement.classList.add('dark');
-            } else {
-              document.documentElement.classList.remove('dark');
-            }
+            var dark = t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            document.documentElement.classList.toggle('dark', dark);
+            var meta = document.createElement('meta');
+            meta.name = 'color-scheme';
+            meta.content = dark ? 'dark' : 'light';
+            document.head.appendChild(meta);
           })();
         `}} />
       </head>
-      <body className="bg-white dark:bg-black text-gray-800 dark:text-gray-400 antialiased">
+      <body className="min-h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-300 antialiased flex flex-col">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] bg-indigo-600 text-white px-4 py-2 rounded-md">
+          Lewati ke konten
+        </a>
         <Header />
-        <main id="main-content" className="mx-auto max-w-screen-lg px-5 py-5 lg:px-8 lg:py-8">
+        <main id="main-content" className="flex-1 w-full mx-auto max-w-screen-lg px-5 py-6 lg:px-8 lg:py-10">
           {children}
         </main>
         <Footer />

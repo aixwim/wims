@@ -2,9 +2,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { href } from '@/lib/url';
+import { formatDate } from '@/lib/format';
 import type { Post } from '@/lib/posts';
 
-export default function SearchInner({ searchIndex }: { searchIndex: Pick<Post, 'slug' | 'title' | 'excerpt' | 'tags'>[] }) {
+type SearchItem = Pick<Post, 'slug' | 'title' | 'excerpt' | 'tags' | 'date'>;
+
+export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[] }) {
   const [q, setQ] = useState('');
 
   const query = q.toLowerCase().trim();
@@ -18,34 +21,60 @@ export default function SearchInner({ searchIndex }: { searchIndex: Pick<Post, '
     : [];
 
   return (
-    <>
-      <label htmlFor="search-input" className="sr-only">Cari artikel</label>
-      <input
-        id="search-input"
-        type="search"
-        className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 text-sm text-gray-900 dark:text-white outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors mb-8"
-        placeholder="Search articles..."
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        autoFocus
-      />
+    <div>
+      <div className="relative mb-8">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" />
+        </svg>
+        <label htmlFor="search-input" className="sr-only">Cari artikel</label>
+        <input
+          id="search-input"
+          type="search"
+          className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 pl-12 pr-4 py-3.5 text-sm text-gray-900 dark:text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 transition-all placeholder:text-gray-400"
+          placeholder="Cari judul, isi, atau tag..."
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          autoFocus
+        />
+      </div>
+
       {query && results.length === 0 && (
-        <p className="text-gray-500 dark:text-gray-400 text-center py-10">No articles found for &ldquo;{q}&rdquo;</p>
+        <div className="text-center py-14">
+          <p className="text-gray-400 dark:text-gray-500 mb-2 text-5xl" aria-hidden="true">&#128269;</p>
+          <p className="text-gray-500 dark:text-gray-400">Tidak ada artikel untuk &ldquo;{q}&rdquo;</p>
+          <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Coba kata kunci lain.</p>
+        </div>
       )}
+
+      {query && results.length > 0 && (
+        <p className="text-sm text-gray-400 dark:text-gray-500 mb-4">
+          {results.length} hasil untuk &ldquo;{q}&rdquo;
+        </p>
+      )}
+
       {results.length > 0 && (
-        <div className="space-y-6">
+        <div className="space-y-2">
           {results.map((post) => (
-            <article key={post.slug} className="group">
-              <Link href={href(`/posts/${post.slug}/`)} prefetch={false} className="block">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{post.excerpt}</p>
-              </Link>
-            </article>
+            <Link
+              key={post.slug}
+              href={href(`/posts/${post.slug}/`)}
+              prefetch={false}
+              className="group block rounded-xl px-4 py-3 border border-gray-100 dark:border-gray-800 hover:border-indigo-200 dark:hover:border-indigo-900 hover:shadow-md hover:-translate-y-0.5 transition-all"
+            >
+              <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 mb-1.5">
+                <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
+                {post.tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">#{tag}</span>
+                ))}
+              </div>
+              <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">{post.excerpt}</p>
+            </Link>
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }

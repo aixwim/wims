@@ -1,13 +1,16 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getPostBySlug, getAllPosts, formatDate, readingMin } from '@/lib/posts';
+import rehypeSlug from 'rehype-slug';
+import { getPostBySlug, getAllPosts, getAdjacentPosts, formatDate, readingMin } from '@/lib/posts';
 import { href, canonicalUrl, absoluteUrl } from '@/lib/url';
 import DisqusComments from '@/components/DisqusComments';
 import ShareButtons from '@/components/ShareButtons';
 import RelatedPosts from '@/components/RelatedPosts';
 import ReadingProgress from '@/components/ReadingProgress';
 import BackToTop from '@/components/BackToTop';
+import TableOfContents from '@/components/TableOfContents';
+import { extractHeadings } from '@/lib/headings';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -25,16 +28,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = canonicalUrl(`/posts/${slug}/`);
   return {
     title: post.metaTitle || post.title,
-    description: post.excerpt,
+    description: post.metaDescription || post.excerpt,
     alternates: { canonical: url },
     openGraph: {
       title: post.metaTitle || post.title,
-      description: post.excerpt,
+      description: post.metaDescription || post.excerpt,
       url,
       type: 'article',
       publishedTime: post.date.toISOString(),
       tags: post.tags,
       images: [{ url: absoluteUrl('/og.png'), width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.metaTitle || post.title,
+      description: post.metaDescription || post.excerpt,
+      images: [absoluteUrl('/og.png')],
     },
   };
 }
@@ -51,8 +60,11 @@ export default async function PostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const { prev: prevPost, next: nextPost } = getAdjacentPosts(slug);
+
   const url = canonicalUrl(`/posts/${slug}/`);
   const relatedPosts = getRelatedPosts(slug, post.tags);
+  const tocHeadings = extractHeadings(post.body);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -60,91 +72,187 @@ export default async function PostPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date.toISOString(),
-    author: { '@type': 'Person', name: 'aixwim' },
+    author: {
+      '@type': 'Person',
+      name: 'aixwim',
+      url: absoluteUrl('/about/'),
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'aixwim',
+      url: absoluteUrl('/about/'),
+    },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     image: absoluteUrl('/og.png'),
+    keywords: post.tags.join(', '),
+    inLanguage: 'id-ID',
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Posts', item: absoluteUrl('/posts/') },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
   };
 
   return (
     <>
       <ReadingProgress />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <article className="max-w-screen-md mx-auto">
-        {/* Header */}
-        <header className="mb-10">
-          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
-            <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
-            <span>&middot;</span>
-            <span>{readingMin(post.body)} min read</span>
-          </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-          <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold tracking-tight text-gray-900 dark:text-white leading-[1.2] mb-5">
-            {post.title}
-          </h1>
+      <div className="flex gap-8">
+        {/* Sidebar TOC (desktop) */}
+        <TableOfContents headings={tocHeadings} />
 
-          {post.excerpt && (
-            <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed">{post.excerpt}</p>
-          )}
+        <article className="max-w-screen-md flex-1 min-w-0 mx-auto">
+          {/* Breadcrumbs */}
+          <nav className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 mb-6 flex-wrap" aria-label="Breadcrumb">
+            <Link href={href('/')} prefetch={false} className="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Home</Link>
+            <span aria-hidden="true">/</span>
+            <Link href={href('/posts/')} prefetch={false} className="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Posts</Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-gray-600 dark:text-gray-300 line-clamp-1">{post.title}</span>
+          </nav>
 
-          {/* Author + Share */}
-          <div className="flex items-center justify-between mt-8 pb-8 border-b border-gray-100 dark:border-gray-800">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
-                A
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-900 dark:text-white">aixwim</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Web Developer</p>
-              </div>
-            </div>
-            <ShareButtons title={post.title} url={url} />
-          </div>
-
-          {/* Tags */}
-          {post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4">
-              {post.tags.map((tag) => (
+          {/* Header */}
+          <header className="mb-8">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+              {post.category && (
                 <Link
-                  key={tag}
-                  href={href(`/tags/${tag}/`)}
+                  href={href(`/tags/${post.category.toLowerCase()}/`)}
                   prefetch={false}
-                  className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full px-3 py-1 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
+                  className="badge bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 transition-colors"
                 >
-                  #{tag}
+                  {post.category}
                 </Link>
-              ))}
+              )}
+              <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
+              <span aria-hidden="true">&middot;</span>
+              <span>{readingMin(post.body)} min baca</span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-[1.2] mb-5">
+              {post.title}
+            </h1>
+
+            {post.excerpt && (
+              <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-6">{post.excerpt}</p>
+            )}
+
+            {/* Author + Share */}
+            <div className="flex flex-wrap items-center justify-between gap-4 py-5 border-y border-gray-100 dark:border-gray-800">
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold text-sm">
+                  a
+                </span>
+                <div>
+                  <Link href={href('/about/')} prefetch={false} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+                    aixwim
+                  </Link>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Web Developer &amp; Content Creator</p>
+                </div>
+              </div>
+              <ShareButtons title={post.title} url={url} />
+            </div>
+
+            {/* Tags */}
+            {post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-4">
+                {post.tags.map((tag) => (
+                  <Link
+                    key={tag}
+                    href={href(`/tags/${tag}/`)}
+                    prefetch={false}
+                    className="text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1.5 hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
+                  >
+                    #{tag}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </header>
+
+          {/* Cover */}
+          {post.cover ? (
+            <img
+              src={post.cover.startsWith('/') ? post.cover : href(`/uploads/${post.cover}`)}
+              alt={post.title}
+              width={1200}
+              height={675}
+              className="aspect-[16/9] w-full object-cover rounded-2xl mb-10"
+            />
+          ) : (
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-10 bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-500">
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.35) 0, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.25) 0, transparent 40%)' }} aria-hidden="true" />
+              <span className="absolute bottom-4 left-4 text-white font-extrabold tracking-tight text-2xl md:text-3xl drop-shadow-lg px-2">
+                {post.title}
+              </span>
             </div>
           )}
-        </header>
 
-        {/* Cover image placeholder */}
-        <div className="aspect-video bg-gray-100 dark:bg-gray-800 rounded-xl mb-10 overflow-hidden">
-          <div className="w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700" />
-        </div>
+          {/* Content */}
+          <div className="prose max-w-none">
+            <MDXRemote source={post.body} options={{ mdxOptions: { rehypePlugins: [rehypeSlug] } }} />
+          </div>
 
-        {/* Content */}
-        <div className="prose prose-lg prose-gray dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-gray-900 dark:prose-strong:text-white prose-code:text-pink-600 dark:prose-code:text-pink-400 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300 max-w-none">
-          <MDXRemote source={post.body} />
-        </div>
+          {/* Author box */}
+          <div className="mt-12 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gradient-to-br from-indigo-50/60 to-violet-50/60 dark:from-gray-900 dark:to-gray-900 p-6 flex flex-col sm:flex-row gap-4 items-start">
+            <span className="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold text-xl shrink-0">
+              a
+            </span>
+            <div>
+              <p className="font-bold text-gray-900 dark:text-white mb-1">Ditulis oleh aixwim</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                Seorang web developer yang suka berbagi pengetahuan tentang teknologi, SEO, dan pengembangan web. Semoga artikel ini bermanfaat untukmu!
+              </p>
+            </div>
+          </div>
 
-        {/* Share bottom */}
-        <div className="mt-12 pt-6 border-t border-gray-100 dark:border-gray-800">
-          <ShareButtons title={post.title} url={url} />
-        </div>
+          {/* Share bottom */}
+          <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+            <ShareButtons title={post.title} url={url} />
+            <Link href={href('/posts/')} prefetch={false} className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+              Semua artikel &rarr;
+            </Link>
+          </div>
 
-        {/* Related posts */}
-        <RelatedPosts posts={relatedPosts} />
+          {/* Prev / Next */}
+          <nav className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4" aria-label="Navigasi artikel">
+            {prevPost ? (
+              <Link href={href(`/posts/${prevPost.slug}/`)} prefetch={false} className="group card card-hover p-5">
+                <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1 mb-2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+                  Artikel sebelumnya
+                </span>
+                <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2">
+                  {prevPost.title}
+                </span>
+              </Link>
+            ) : <span />}
+            {nextPost && (
+              <Link href={href(`/posts/${nextPost.slug}/`)} prefetch={false} className="group card card-hover p-5 text-right">
+                <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center justify-end gap-1 mb-2">
+                  Artikel berikutnya
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </span>
+                <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2">
+                  {nextPost.title}
+                </span>
+              </Link>
+            )}
+          </nav>
 
-        {/* Back to archive */}
-        <div className="mt-8">
-          <Link href={href('/posts/')} className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors">
-            &larr; Back to all posts
-          </Link>
-        </div>
+          {/* Related posts */}
+          <RelatedPosts posts={relatedPosts} />
 
-        {/* Disqus */}
-        <DisqusComments slug={slug} />
-      </article>
+          {/* Disqus */}
+          <DisqusComments slug={slug} />
+        </article>
+      </div>
 
       <BackToTop />
     </>

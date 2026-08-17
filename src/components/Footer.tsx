@@ -1,50 +1,95 @@
-'use client';
-import { useState } from 'react';
+import Link from 'next/link';
+import { href } from '@/lib/url';
+import Logo from './Logo';
+import { getAllTags } from '@/lib/posts';
 
 export default function Footer() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'system';
-    }
-    return 'system';
-  });
-
-  const applyTheme = (value: string) => {
-    setTheme(value);
-    localStorage.setItem('theme', value);
-    const root = document.documentElement;
-    if (value === 'dark' || (value === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-  };
+  const tags = getAllTags().slice(0, 8);
 
   return (
-    <footer className="border-t border-gray-100 dark:border-gray-800 mt-10">
-      <div className="mx-auto max-w-screen-lg px-5 py-5 lg:px-8 lg:py-8">
-        <div className="text-center text-sm text-gray-500 dark:text-gray-600 space-y-2">
-          <p>&copy; {new Date().getFullYear()} aixwim. All rights reserved.</p>
-          <p>
-            Made with Next.js &middot; Theme by{' '}
-            <a href="https://web3templates.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500">Web3Templates</a>
-          </p>
-          <div className="flex items-center justify-center gap-2 pt-2">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-            <label htmlFor="theme-select" className="sr-only">Pilih tema</label>
-            <select
-              id="theme-select"
-              value={theme}
-              onChange={(e) => applyTheme(e.target.value)}
-              className="bg-transparent text-sm text-gray-500 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="system">System</option>
-              <option value="dark">Dark</option>
-              <option value="light">Light</option>
-            </select>
+    <footer className="border-t border-gray-100 dark:border-gray-800 mt-16 bg-gray-50/60 dark:bg-gray-950/60">
+      <div className="mx-auto max-w-screen-lg px-5 py-12 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-3">
+          {/* Brand */}
+          <div className="space-y-4">
+            <Logo />
+            <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Blog pribadi tentang teknologi, pengembangan web, dan catatan harian untuk berbagi pengetahuan yang bermanfaat.
+            </p>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://github.com/aixwim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white transition-colors"
+                aria-label="GitHub"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
+                  <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.49A10.25 10.25 0 0022 12.25C22 6.58 17.52 2 12 2z" />
+                </svg>
+              </a>
+              <a
+                href="mailto:hello@aixwim.dev"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white transition-colors"
+                aria-label="Email"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2" /><path d="M22 6l-10 7L2 6" />
+                </svg>
+              </a>
+              <a
+                href={href('/rss.xml')}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white transition-colors"
+                aria-label="RSS Feed"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
+                  <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9zM6.18 15.64a2.18 2.18 0 110 4.36 2.18 2.18 0 010-4.36z" />
+                </svg>
+              </a>
+            </div>
           </div>
+
+          {/* Navigation */}
+          <nav aria-label="Navigasi footer">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white mb-4">Navigasi</h3>
+            <ul className="space-y-2.5 text-sm">
+              {[
+                { href: href('/'), label: 'Beranda' },
+                { href: href('/posts/'), label: 'Semua Artikel' },
+                { href: href('/tags/'), label: 'Tags' },
+                { href: href('/about/'), label: 'Tentang' },
+                { href: href('/contact/'), label: 'Kontak' },
+                { href: href('/search/'), label: 'Cari' },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} prefetch={false} className="text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Popular topics */}
+          <nav aria-label="Topik populer">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white mb-4">Topik Populer</h3>
+            <ul className="space-y-2.5 text-sm">
+              {tags.map(({ tag, count }) => (
+                <li key={tag}>
+                  <Link href={href(`/tags/${tag}/`)} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
+                    <span>#{tag}</span>
+                    <span className="text-xs text-gray-400 dark:text-gray-600">({count})</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-12 pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-400 dark:text-gray-500">
+          <p>{new Date().getFullYear()} aixwim.dev</p>
+          <p className="text-xs text-gray-400 dark:text-gray-600">Dibangun dengan Next.js</p>
         </div>
       </div>
     </footer>

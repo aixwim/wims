@@ -1,35 +1,78 @@
 import Link from 'next/link';
-import { getAllPosts, formatDate } from '@/lib/posts';
+import { getAllPosts, getAllTags } from '@/lib/posts';
 import { href, canonicalUrl } from '@/lib/url';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Archive',
-  description: 'Semua artikel di blog aixwim.',
+  title: 'Arsip Artikel',
+  description: 'Semua artikel di blog aixwim tentang teknologi, web development, SEO, dan tips.',
   alternates: { canonical: canonicalUrl('/posts/') },
 };
 
 export default function PostsPage() {
   const posts = getAllPosts();
+  const tags = getAllTags().slice(0, 8);
+  const years = [...new Set(posts.map((p) => p.date.getFullYear()))].sort((a, b) => b - a);
 
   return (
     <section>
-      <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">Archive</h1>
-      <div className="space-y-8">
-        {posts.map((post) => (
-          <article key={post.slug} className="group">
-            <Link href={href(`/posts/${post.slug}/`)} prefetch={false} className="block">
-              <p className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-1">{formatDate(post.date)}</p>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
-                {post.title}
-              </h2>
-              {post.excerpt && (
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">{post.excerpt}</p>
-              )}
-            </Link>
-          </article>
+      {/* Header */}
+      <header className="mb-10">
+        <span className="badge bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 mb-4">Arsip</span>
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
+          Semua Artikel
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 max-w-xl">
+          {posts.length} artikel yang ditulis untuk berbagi pengetahuan tentang teknologi dan pengembangan web.
+        </p>
+      </header>
+
+      {/* Quick tags */}
+      <div className="flex flex-wrap gap-2 mb-10">
+        {tags.map(({ tag, count }) => (
+          <Link
+            key={tag}
+            href={href(`/tags/${tag}/`)}
+            prefetch={false}
+            className="badge bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
+          >
+            #{tag}
+            <span className="text-xs text-gray-400 dark:text-gray-500">{count}</span>
+          </Link>
         ))}
       </div>
+
+      {/* Posts grouped by year */}
+      {years.map((year) => {
+        const yearPosts = posts.filter((p) => p.date.getFullYear() === year);
+        return (
+          <div key={year} className="mb-12">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6">
+              {year}
+            </h2>
+            <div className="space-y-2">
+              {yearPosts.map((post, i) => (
+                <Link
+                  key={post.slug}
+                  href={href(`/posts/${post.slug}/`)}
+                  prefetch={false}
+                  className={`group flex items-baseline gap-4 rounded-xl px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900 ${i !== yearPosts.length - 1 ? 'border-b border-gray-100 dark:border-gray-800' : ''}`}
+                >
+                  <time className="text-xs text-gray-400 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
+                    {post.date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' })}
+                  </time>
+                  <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
+                    {post.title}
+                  </span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 ml-auto text-gray-300 dark:text-gray-600 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all shrink-0" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </Link>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </section>
   );
 }
