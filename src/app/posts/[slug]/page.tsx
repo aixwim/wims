@@ -51,31 +51,33 @@ export default async function PostPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <article>
-        <header className="mb-8">
-          <h1 className="page-title">{post.title}</h1>
-          <p className="text-[0.85rem] font-semibold uppercase tracking-[0.07em] text-muted">
-            {formatDate(post.date)} · {readingMin(post.body)} menit baca
+      <article className="mx-auto max-w-2xl px-6 py-16">
+        <header className="mb-10">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-2">{post.title}</h1>
+          <p className="text-sm text-gray-500">
+            {formatDate(post.date)} &middot; {readingMin(post.body)} min read
           </p>
           {post.tags.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-3 flex gap-2">
               {post.tags.map((tag) => (
                 <Link
                   key={tag}
                   href={href(`/tags/${tag}/`)}
-                  className="text-[0.78rem] font-semibold text-accent hover:text-accent-hover transition-colors"
+                  className="text-xs font-medium text-gray-500 bg-gray-100 rounded-full px-2.5 py-0.5 hover:bg-gray-200 transition-colors"
                 >
-                  #{tag}
+                  {tag}
                 </Link>
               ))}
             </div>
           )}
         </header>
-        <div className="prose">
+        <div className="prose prose-gray prose-headings:font-semibold prose-a:text-blue-600 prose-strong:text-gray-900 max-w-none">
           <MDXRemote source={post.body} />
         </div>
-        <div className="mt-12 border-t border-border pt-6">
-          <Link href={href('/posts/')}>← Kembali ke semua artikel</Link>
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <Link href={href('/posts/')} className="text-sm font-semibold text-blue-600 hover:text-blue-500">
+            &larr; Kembali ke semua artikel
+          </Link>
         </div>
       </article>
     </>

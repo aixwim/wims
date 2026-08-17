@@ -19,8 +19,8 @@ export default function SearchPage() {
   }));
 
   return (
-    <section>
-      <h1 className="page-title">Cari Artikel</h1>
+    <section className="mx-auto max-w-2xl px-6 py-16">
+      <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">Cari Artikel</h1>
       <SearchInner searchIndex={searchIndex} />
     </section>
   );

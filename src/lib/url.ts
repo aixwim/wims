@@ -1,3 +1,2 @@
-const base = '/wims';
-export const href = (p: string) => `${base}${p}`;
+export const href = (p: string) => p;
 export const siteUrl = 'https://aixwim.github.io';
