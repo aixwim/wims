@@ -22,7 +22,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-gray-100 dark:border-gray-800 mt-10">
-      <div className="container mx-auto px-8 max-w-screen-lg py-5 lg:py-8">
+      <div className="mx-auto max-w-screen-lg px-5 py-5 lg:px-8 lg:py-8">
         <div className="text-center text-sm text-gray-500 dark:text-gray-600 space-y-2">
           <p>&copy; {new Date().getFullYear()} aixwim. All rights reserved.</p>
           <p>

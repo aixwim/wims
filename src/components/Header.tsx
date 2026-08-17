@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="border-b border-gray-100 dark:border-gray-800">
-      <div className="container mx-auto px-8 max-w-screen-lg">
+      <div className="mx-auto max-w-screen-lg px-5 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-600 text-white px-4 py-2 rounded-md z-50">
             Skip to content

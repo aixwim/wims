@@ -86,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-white dark:bg-black text-gray-800 dark:text-gray-400 antialiased">
         <Header />
-        <main id="main-content" className="container mx-auto px-8 max-w-screen-lg py-5 lg:py-8">
+        <main id="main-content" className="mx-auto max-w-screen-lg px-5 py-5 lg:px-8 lg:py-8">
           {children}
         </main>
         <Footer />
