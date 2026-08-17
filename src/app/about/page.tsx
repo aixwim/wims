@@ -7,9 +7,19 @@ export const metadata: Metadata = {
   alternates: { canonical: siteUrl + href('/about/') },
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'aixwim',
+  url: siteUrl + '/wims/',
+  jobTitle: 'Web Developer',
+  sameAs: ['https://github.com/aixwim'],
+};
+
 export default function AboutPage() {
   return (
     <section className="max-w-screen-md mx-auto">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">About</h1>
       <div className="prose prose-gray dark:prose-invert max-w-none">
         <p>Haloo! Saya aixwim, seorang pengembang web yang tertarik dengan teknologi, sumber terbuka, dan pembelajaran berkelanjutan.</p>
