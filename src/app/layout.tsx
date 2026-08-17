@@ -66,9 +66,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
-        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
-        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
         <link rel="manifest" href={basePath + '/manifest.json'} />
         <link rel="dns-prefetch" href="https://aixwim.disqus.com" />
         <link rel="preconnect" href="https://aixwim.disqus.com" crossOrigin="anonymous" />
