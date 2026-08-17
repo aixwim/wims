@@ -1,13 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Footer() {
-  const [theme, setTheme] = useState('system');
-
-  useEffect(() => {
-    const stored = localStorage.getItem('theme');
-    setTheme(stored || 'system');
-  }, []);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'system';
+    }
+    return 'system';
+  });
 
   const applyTheme = (value: string) => {
     setTheme(value);

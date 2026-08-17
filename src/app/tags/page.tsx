@@ -20,6 +20,7 @@ export default function TagsPage() {
           <Link
             key={tag}
             href={href(`/tags/${tag}/`)}
+            prefetch={false}
             className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 rounded-full px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
             {tag} <span className="text-gray-400 dark:text-gray-500">({count})</span>

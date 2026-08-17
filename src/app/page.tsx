@@ -29,7 +29,7 @@ export default function HomePage() {
       <div className="grid gap-10 md:grid-cols-2 lg:gap-10 mb-10">
         {featured.map((post) => (
           <article key={post.slug} className="group cursor-pointer">
-            <Link href={href(`/posts/${post.slug}/`)}>
+            <Link href={href(`/posts/${post.slug}/`)} prefetch={false}>
               <div className="aspect-video bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden mb-4">
                 <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700" />
               </div>
@@ -54,7 +54,7 @@ export default function HomePage() {
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {rest.map((post) => (
           <article key={post.slug} className="group cursor-pointer">
-            <Link href={href(`/posts/${post.slug}/`)}>
+            <Link href={href(`/posts/${post.slug}/`)} prefetch={false}>
               <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden mb-4">
                 <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 group-hover:scale-105 transition-all duration-300" />
               </div>

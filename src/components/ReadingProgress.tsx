@@ -7,13 +7,18 @@ export default function ReadingProgress() {
   useEffect(() => {
     const update = () => {
       const el = document.documentElement;
-      const scrollTop = el.scrollTop;
-      const scrollHeight = el.scrollHeight - el.clientHeight;
+      const scrollTop = window.scrollY || el.scrollTop || document.body.scrollTop;
+      const scrollHeight = Math.max(el.scrollHeight, document.body.scrollHeight) - el.clientHeight;
       setProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
     };
 
     window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
+    window.addEventListener('resize', update, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   }, []);
 
   return (

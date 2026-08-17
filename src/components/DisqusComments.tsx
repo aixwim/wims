@@ -5,28 +5,51 @@ import { useEffect, useRef } from 'react';
 export default function DisqusComments({ slug }: { slug: string }) {
   const pathname = usePathname();
   const loaded = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (loaded.current) return;
-    loaded.current = true;
 
-    const pageUrl = `https://aixwim.github.io/wims/posts/${slug}/`;
+    const container = containerRef.current;
+    if (!container) return;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).disqus_config = function () {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (this as any).page = { url: pageUrl, identifier: slug };
+    const loadDisqus = () => {
+      if (loaded.current) return;
+      loaded.current = true;
+
+      const pageUrl = `https://aixwim.github.io/wims/posts/${slug}/`;
+
+      (window as { disqus_config?: unknown }).disqus_config = function () {
+        (this as { page?: { url: string; identifier: string } }).page = { url: pageUrl, identifier: slug };
+      };
+
+      const s = document.createElement('script');
+      s.src = 'https://aixwim.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', String(+new Date()));
+      s.async = true;
+      document.head.appendChild(s);
     };
 
-    const s = document.createElement('script');
-    s.src = 'https://aixwim.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', String(+new Date()));
-    s.async = true;
-    document.head.appendChild(s);
+    if (typeof IntersectionObserver === 'undefined') {
+      loadDisqus();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          observer.disconnect();
+          loadDisqus();
+        }
+      },
+      { rootMargin: '600px' }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
   }, [slug, pathname]);
 
   return (
-    <div className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800">
+    <div ref={containerRef} className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800">
       <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Komentar</h2>
       <div id="disqus_thread" />
       <noscript>

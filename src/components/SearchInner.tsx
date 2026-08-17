@@ -36,7 +36,7 @@ export default function SearchInner({ searchIndex }: { searchIndex: Pick<Post, '
         <div className="space-y-6">
           {results.map((post) => (
             <article key={post.slug} className="group">
-              <Link href={href(`/posts/${post.slug}/`)} className="block">
+              <Link href={href(`/posts/${post.slug}/`)} prefetch={false} className="block">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
                   {post.title}
                 </h3>

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getPostBySlug, getAllPosts, formatDate, readingMin } from '@/lib/posts';
-import { href, siteUrl, canonicalUrl, absoluteUrl } from '@/lib/url';
+import { href, canonicalUrl, absoluteUrl } from '@/lib/url';
 import DisqusComments from '@/components/DisqusComments';
 import ShareButtons from '@/components/ShareButtons';
 import RelatedPosts from '@/components/RelatedPosts';
@@ -107,6 +107,7 @@ export default async function PostPage({ params }: Props) {
                 <Link
                   key={tag}
                   href={href(`/tags/${tag}/`)}
+                  prefetch={false}
                   className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full px-3 py-1 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
                 >
                   #{tag}

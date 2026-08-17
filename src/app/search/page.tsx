@@ -1,7 +1,7 @@
 import { getAllPosts } from '@/lib/posts';
 import SearchInner from '@/components/SearchInner';
 import type { Metadata } from 'next';
-import { siteUrl, href, canonicalUrl } from '@/lib/url';
+import { canonicalUrl } from '@/lib/url';
 
 export const metadata: Metadata = {
   title: 'Search',

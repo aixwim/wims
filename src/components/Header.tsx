@@ -29,21 +29,21 @@ export default function Header() {
           {/* Left nav - desktop */}
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-400" aria-label="Navigasi utama">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-blue-500 transition-colors">
+              <Link key={link.href} href={link.href} prefetch={false} className="hover:text-blue-500 transition-colors">
                 {link.label}
               </Link>
             ))}
           </nav>
 
           {/* Center logo */}
-          <Link href={href('/')} className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <Link href={href('/')} prefetch={false} className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             aixwim
           </Link>
 
           {/* Right nav - desktop */}
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-400" aria-label="Arsip dan tag">
-            <Link href={href('/posts/')} className="hover:text-blue-500 transition-colors">Archive</Link>
-            <Link href={href('/tags/')} className="hover:text-blue-500 transition-colors">Tags</Link>
+            <Link href={href('/posts/')} prefetch={false} className="hover:text-blue-500 transition-colors">Archive</Link>
+            <Link href={href('/tags/')} prefetch={false} className="hover:text-blue-500 transition-colors">Tags</Link>
           </nav>
 
           {/* Mobile hamburger */}
@@ -66,12 +66,12 @@ export default function Header() {
         {mobileOpen && (
           <nav id="mobile-nav" className="md:hidden pb-4 space-y-3 text-sm font-medium text-gray-600 dark:text-gray-400" aria-label="Navigasi mobile">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="block hover:text-blue-500" onClick={() => setMobileOpen(false)}>
+              <Link key={link.href} href={link.href} prefetch={false} className="block hover:text-blue-500" onClick={() => setMobileOpen(false)}>
                 {link.label}
               </Link>
             ))}
-            <Link href={href('/posts/')} className="block hover:text-blue-500" onClick={() => setMobileOpen(false)}>Archive</Link>
-            <Link href={href('/tags/')} className="block hover:text-blue-500" onClick={() => setMobileOpen(false)}>Tags</Link>
+            <Link href={href('/posts/')} prefetch={false} className="block hover:text-blue-500" onClick={() => setMobileOpen(false)}>Archive</Link>
+            <Link href={href('/tags/')} prefetch={false} className="block hover:text-blue-500" onClick={() => setMobileOpen(false)}>Tags</Link>
           </nav>
         )}
       </div>
