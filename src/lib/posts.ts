@@ -15,7 +15,10 @@ export interface Post {
 
 const contentDir = path.join(process.cwd(), 'content');
 
-export function getAllPosts(): Post[] {
+let _cache: Post[] | null = null;
+
+function readAllPosts(): Post[] {
+  if (_cache) return _cache;
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.md'));
   const posts = files.map((file) => {
     const raw = fs.readFileSync(path.join(contentDir, file), 'utf-8');
@@ -31,24 +34,16 @@ export function getAllPosts(): Post[] {
       body: content,
     };
   });
-  return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+  _cache = posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+  return _cache;
+}
+
+export function getAllPosts(): Post[] {
+  return readAllPosts();
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
-  const filePath = path.join(contentDir, `${slug}.md`);
-  if (!fs.existsSync(filePath)) return undefined;
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(raw);
-  return {
-    slug,
-    title: data.title ?? '',
-    date: new Date(data.date),
-    excerpt: data.excerpt ?? '',
-    tags: data.tags ?? [],
-    category: data.category,
-    metaTitle: data.meta_title,
-    body: content,
-  };
+  return readAllPosts().find((p) => p.slug === slug);
 }
 
 export function formatDate(d: Date | string): string {

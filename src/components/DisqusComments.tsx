@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 
 declare global {
   interface Window {
-    DISQUS?: { reset: (config: Record<string, unknown>) => void };
-    disqus_config?: (this: { page: Record<string, unknown> }) => void;
+    DISQUS?: { reset: (config: { config: { page: { url: string; identifier: string } } }) => void };
+    disqus_config?: (this: { page: { url: string; identifier: string } }) => void;
   }
 }
 
@@ -17,9 +17,7 @@ export default function DisqusComments() {
 
     if (window.DISQUS) {
       window.DISQUS.reset({
-        config: {
-          page: { url: pageUrl, identifier: pathname },
-        },
+        config: { page: { url: pageUrl, identifier: pathname } },
       });
     } else {
       window.disqus_config = function () {
@@ -35,5 +33,5 @@ export default function DisqusComments() {
     }
   }, [pathname]);
 
-  return <div id="disqus_thread" className="mt-12" />;
+  return <div id="disqus_thread" role="region" aria-label="Komentar Disqus" className="mt-12" />;
 }

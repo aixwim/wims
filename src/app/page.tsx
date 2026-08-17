@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getAllPosts, formatDate, readingMin } from '@/lib/posts';
+import { getAllPosts, formatDate } from '@/lib/posts';
 import { href, siteUrl } from '@/lib/url';
 import type { Metadata } from 'next';
 

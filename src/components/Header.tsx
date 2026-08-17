@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { href } from '@/lib/url';
 
 const navLinks = [
@@ -12,12 +12,22 @@ const navLinks = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+
   return (
     <header className="border-b border-gray-100 dark:border-gray-800">
       <div className="container mx-auto px-8 max-w-screen-lg">
         <div className="flex items-center justify-between h-16 md:h-20">
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-600 text-white px-4 py-2 rounded-md z-50">
+            Skip to content
+          </a>
+
           {/* Left nav - desktop */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-400">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-400" aria-label="Navigasi utama">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} className="hover:text-blue-500 transition-colors">
                 {link.label}
@@ -31,7 +41,7 @@ export default function Header() {
           </Link>
 
           {/* Right nav - desktop */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-400">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-400" aria-label="Arsip dan tag">
             <Link href={href('/posts/')} className="hover:text-blue-500 transition-colors">Archive</Link>
             <Link href={href('/tags/')} className="hover:text-blue-500 transition-colors">Tags</Link>
           </nav>
@@ -40,7 +50,9 @@ export default function Header() {
           <button
             className="md:hidden p-2 text-gray-600 dark:text-gray-400"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
           >
             {mobileOpen ? (
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -52,7 +64,7 @@ export default function Header() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <nav className="md:hidden pb-4 space-y-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+          <nav id="mobile-nav" className="md:hidden pb-4 space-y-3 text-sm font-medium text-gray-600 dark:text-gray-400" aria-label="Navigasi mobile">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} className="block hover:text-blue-500" onClick={() => setMobileOpen(false)}>
                 {link.label}

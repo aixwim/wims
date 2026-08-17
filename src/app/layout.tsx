@@ -15,9 +15,18 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'aixwim',
     locale: 'id_ID',
+    images: [
+      {
+        url: '/wims/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'aixwim Blog',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@aixwim',
   },
   robots: {
     index: true,
@@ -28,12 +37,19 @@ export const metadata: Metadata = {
       'application/rss+xml': [{ title: 'aixwim', url: href('/rss.xml') }],
     },
   },
+  icons: {
+    icon: '/wims/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+        <link rel="manifest" href={href('/manifest.json')} />
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {
             var t = localStorage.getItem('theme');
@@ -47,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-white dark:bg-black text-gray-800 dark:text-gray-400 antialiased">
         <Header />
-        <main className="container mx-auto px-8 max-w-screen-lg py-5 lg:py-8">
+        <main id="main-content" className="container mx-auto px-8 max-w-screen-lg py-5 lg:py-8">
           {children}
         </main>
         <Footer />

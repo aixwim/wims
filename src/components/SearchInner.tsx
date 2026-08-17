@@ -19,7 +19,9 @@ export default function SearchInner({ searchIndex }: { searchIndex: Pick<Post, '
 
   return (
     <>
+      <label htmlFor="search-input" className="sr-only">Cari artikel</label>
       <input
+        id="search-input"
         type="search"
         className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 text-sm text-gray-900 dark:text-white outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors mb-8"
         placeholder="Search articles..."
