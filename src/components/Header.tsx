@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { href } from '@/lib/url';
 import Logo from './Logo';
@@ -15,16 +15,22 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMobileOpen(false);
     };
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => {
+      const el = headerRef.current;
+      if (!el) return;
+      const scrolled = window.scrollY > 10;
+      el.classList.toggle('is-scrolled', scrolled);
+    };
     document.addEventListener('keydown', onKey);
     window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
     return () => {
       document.removeEventListener('keydown', onKey);
       window.removeEventListener('scroll', onScroll);
@@ -49,11 +55,8 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
-        scrolled
-          ? 'border-gray-200 bg-white/85 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/85'
-          : 'border-transparent bg-white/60 backdrop-blur-sm dark:bg-gray-950/60'
-      }`}
+      ref={headerRef}
+      className="sticky top-0 z-50 border-b transition-all duration-300 border-transparent bg-white/60 backdrop-blur-sm dark:bg-gray-950/60 is-scrolled:border-gray-200 is-scrolled:bg-white/85 is-scrolled:backdrop-blur-md dark:is-scrolled:border-gray-800 dark:is-scrolled:bg-gray-950/85"
     >
       <div className="mx-auto max-w-screen-lg px-5 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">

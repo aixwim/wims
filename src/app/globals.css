@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant is-scrolled (&.is-scrolled);
 
 /* ============================================================
    PREMIUM CUSTOM THEME TOKENS
