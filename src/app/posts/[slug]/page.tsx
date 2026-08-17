@@ -142,7 +142,7 @@ export default async function PostPage({ params }: Props) {
         </div>
 
         {/* Disqus */}
-        <DisqusComments />
+        <DisqusComments slug={slug} />
       </article>
 
       <BackToTop />
