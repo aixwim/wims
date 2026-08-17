@@ -1,3 +1,67 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  .prose {
+    --tw-prose-body: theme(colors.gray.700);
+    --tw-prose-headings: theme(colors.gray.900);
+    --tw-prose-links: theme(colors.blue.600);
+    --tw-prose-bold: theme(colors.gray.900);
+    --tw-prose-code: theme(colors.gray.900);
+    --tw-prose-pre-bg: theme(colors.gray.900);
+    --tw-prose-pre-code: theme(colors.gray.100);
+  }
+
+  .dark .prose {
+    --tw-prose-body: theme(colors.gray.300);
+    --tw-prose-headings: theme(colors.white);
+    --tw-prose-links: theme(colors.blue.400);
+    --tw-prose-bold: theme(colors.white);
+    --tw-prose-code: theme(colors.gray.100);
+    --tw-prose-pre-bg: theme(colors.gray.800);
+    --tw-prose-pre-code: theme(colors.gray.200);
+  }
+
+  .prose pre {
+    @apply rounded-lg border border-gray-200 dark:border-gray-700;
+  }
+
+  .prose code:not(pre code) {
+    @apply bg-gray-100 dark:bg-gray-800 text-pink-600 dark:text-pink-400 px-1.5 py-0.5 rounded text-sm font-medium;
+  }
+
+  .prose code:not(pre code)::before,
+  .prose code:not(pre code)::after {
+    content: none;
+  }
+
+  .prose blockquote {
+    @apply border-l-blue-500 bg-blue-50 dark:bg-blue-900/20 py-1 px-4 rounded-r-lg;
+  }
+
+  .prose img {
+    @apply rounded-lg;
+  }
+
+  .prose a {
+    @apply underline decoration-blue-300 dark:decoration-blue-700 underline-offset-2 hover:decoration-blue-500 transition-colors;
+  }
+
+  .prose hr {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+
+  .prose table {
+    @apply text-sm;
+  }
+
+  .prose th {
+    @apply bg-gray-50 dark:bg-gray-800;
+  }
+
+  .prose td,
+  .prose th {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+}
