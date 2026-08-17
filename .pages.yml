@@ -1,0 +1,42 @@
+content:
+  - label: Posts
+    name: posts
+    path: content
+    type: markdown
+    slug:
+      field: title
+      prefix: ""
+    fields:
+      - name: title
+        type: text
+        label: Title
+        required: true
+      - name: date
+        type: date
+        label: Date
+        required: true
+      - name: category
+        type: text
+        label: Category
+      - name: excerpt
+        type: textarea
+        label: Excerpt
+        required: true
+      - name: tags
+        type: list
+        label: Tags
+        field:
+          type: text
+      - name: meta_title
+        type: text
+        label: Meta Title (SEO)
+    view:
+      fields:
+        - title
+        - date
+        - category
+        - tags
+
+media:
+  path: public
+  output: public
