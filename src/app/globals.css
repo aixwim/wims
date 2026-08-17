@@ -23,6 +23,13 @@
     --tw-prose-pre-code: theme(colors.gray.200);
   }
 
+  /* Prevent overflow on article */
+  article {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-width: 0;
+  }
+
   /* Paragraph spacing */
   .prose p {
     @apply leading-[1.8] mb-6;
@@ -65,17 +72,22 @@
     top: 0.75em;
   }
 
-  /* Code blocks */
+  /* Code blocks - fix overflow */
   .prose pre {
     @apply rounded-xl border border-gray-200 dark:border-gray-700 my-8 text-sm leading-relaxed;
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
   .prose pre code {
     @apply bg-transparent p-0 text-sm;
+    white-space: pre;
   }
 
   /* Inline code */
   .prose code:not(pre code) {
     @apply bg-gray-100 dark:bg-gray-800 text-pink-600 dark:text-pink-400 px-1.5 py-0.5 rounded-md text-[0.85em] font-medium;
+    word-break: break-word;
   }
   .prose code:not(pre code)::before,
   .prose code:not(pre code)::after {
@@ -93,11 +105,14 @@
   /* Links */
   .prose a {
     @apply font-medium underline decoration-blue-300 dark:decoration-blue-700 decoration-2 underline-offset-2 hover:decoration-blue-500 transition-colors;
+    word-break: break-word;
   }
 
   /* Images */
   .prose img {
     @apply rounded-xl my-8;
+    max-width: 100%;
+    height: auto;
   }
 
   /* Horizontal rule */
@@ -105,15 +120,19 @@
     @apply border-gray-200 dark:border-gray-700 my-12;
   }
 
-  /* Tables */
+  /* Tables - fix overflow on mobile */
   .prose table {
     @apply text-sm my-8 w-full;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .prose thead {
     @apply border-b-2 border-gray-200 dark:border-gray-700;
   }
   .prose th {
     @apply bg-gray-50 dark:bg-gray-800/80 font-semibold text-gray-900 dark:text-white py-3 px-4 text-left;
+    white-space: nowrap;
   }
   .prose td {
     @apply py-3 px-4;
