@@ -95,8 +95,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
-        <link rel="dns-prefetch" href="https://aixwim.disqus.com" />
-        <link rel="preconnect" href="https://aixwim.disqus.com" crossOrigin="anonymous" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {

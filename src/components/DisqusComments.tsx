@@ -17,6 +17,16 @@ export default function DisqusComments({ slug }: { slug: string }) {
       if (loaded.current) return;
       loaded.current = true;
 
+      const preconnect = document.createElement('link');
+      preconnect.rel = 'preconnect';
+      preconnect.href = 'https://aixwim.disqus.com';
+      preconnect.crossOrigin = 'anonymous';
+      document.head.appendChild(preconnect);
+      const dns = document.createElement('link');
+      dns.rel = 'dns-prefetch';
+      dns.href = 'https://aixwim.disqus.com';
+      document.head.appendChild(dns);
+
       const pageUrl = `https://aixwim.github.io/wims/posts/${slug}/`;
 
       (window as { disqus_config?: unknown }).disqus_config = function () {
