@@ -42,6 +42,26 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'aixwim',
+  url: siteUrl + '/wims/',
+  description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.',
+  publisher: {
+    '@type': 'Person',
+    name: 'aixwim',
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: siteUrl + '/wims/search/?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" suppressHydrationWarning>
@@ -50,6 +70,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
         <link rel="manifest" href={href('/manifest.json')} />
+        <link rel="dns-prefetch" href="https://aixwim.disqus.com" />
+        <link rel="preconnect" href="https://aixwim.disqus.com" crossOrigin="anonymous" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {
             var t = localStorage.getItem('theme');
