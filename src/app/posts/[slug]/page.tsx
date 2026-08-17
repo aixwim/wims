@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getPostBySlug, getAllPosts, formatDate, readingMin } from '@/lib/posts';
-import { href, siteUrl } from '@/lib/url';
+import { href, siteUrl, canonicalUrl, absoluteUrl } from '@/lib/url';
 import DisqusComments from '@/components/DisqusComments';
 import ShareButtons from '@/components/ShareButtons';
 import RelatedPosts from '@/components/RelatedPosts';
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
-  const url = siteUrl + href(`/posts/${slug}/`);
+  const url = canonicalUrl(`/posts/${slug}/`);
   return {
     title: post.metaTitle || post.title,
     description: post.excerpt,
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: post.date.toISOString(),
       tags: post.tags,
-      images: [{ url: '/wims/og.png', width: 1200, height: 630, alt: post.title }],
+      images: [{ url: absoluteUrl('/og.png'), width: 1200, height: 630, alt: post.title }],
     },
   };
 }
@@ -51,7 +51,7 @@ export default async function PostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const url = siteUrl + href(`/posts/${slug}/`);
+  const url = canonicalUrl(`/posts/${slug}/`);
   const relatedPosts = getRelatedPosts(slug, post.tags);
 
   const jsonLd = {
@@ -62,7 +62,7 @@ export default async function PostPage({ params }: Props) {
     datePublished: post.date.toISOString(),
     author: { '@type': 'Person', name: 'aixwim' },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    image: siteUrl + '/wims/og.png',
+    image: absoluteUrl('/og.png'),
   };
 
   return (

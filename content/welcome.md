@@ -8,7 +8,7 @@ tags: ["perkenalan", "blog"]
 
 Ini adalah artikel pertama saya di blog ini.
 
-Saya membuat blog ini menggunakan **Astro** dengan static site generation (SSG), sehingga cepat dan ramah SEO.
+Saya membuat blog ini menggunakan **Next.js** dengan static site generation (SSG), sehingga cepat dan ramah SEO.
 
 ## Mengapa blog ini?
 

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getPostsByTag, getAllTags, formatDate } from '@/lib/posts';
-import { href, siteUrl } from '@/lib/url';
+import { href, siteUrl, canonicalUrl } from '@/lib/url';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `#${tag}`,
     description: `Artikel dengan tag ${tag}.`,
-    alternates: { canonical: siteUrl + href(`/tags/${tag}/`) },
+    alternates: { canonical: canonicalUrl(`/tags/${tag}/`) },
   };
 }
 

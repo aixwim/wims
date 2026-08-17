@@ -1,12 +1,12 @@
 import { getAllPosts } from '@/lib/posts';
 import SearchInner from '@/components/SearchInner';
 import type { Metadata } from 'next';
-import { siteUrl, href } from '@/lib/url';
+import { siteUrl, href, canonicalUrl } from '@/lib/url';
 
 export const metadata: Metadata = {
   title: 'Search',
   description: 'Cari artikel di blog aixwim.',
-  alternates: { canonical: siteUrl + href('/search/') },
+  alternates: { canonical: canonicalUrl('/search/') },
 };
 
 export default function SearchPage() {

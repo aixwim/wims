@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import { siteUrl, href } from '@/lib/url';
+import { siteUrl, href, canonicalUrl, absoluteUrl } from '@/lib/url';
 
 export const metadata: Metadata = {
   title: 'About',
   description: 'Tentang aixwim dan blog ini.',
-  alternates: { canonical: siteUrl + href('/about/') },
+  alternates: { canonical: canonicalUrl('/about/') },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'aixwim',
-  url: siteUrl + '/wims/',
+  url: absoluteUrl('/'),
   jobTitle: 'Web Developer',
   sameAs: ['https://github.com/aixwim'],
 };

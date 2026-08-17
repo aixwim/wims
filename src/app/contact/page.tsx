@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import { siteUrl, href } from '@/lib/url';
+import { siteUrl, href, canonicalUrl, absoluteUrl } from '@/lib/url';
 
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'Hubungi aixwim.',
-  alternates: { canonical: siteUrl + href('/contact/') },
+  alternates: { canonical: canonicalUrl('/contact/') },
 };
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
   name: 'Contact aixwim',
-  url: siteUrl + '/wims/contact/',
+  url: absoluteUrl('/contact/'),
 };
 
 export default function ContactPage() {

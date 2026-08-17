@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { getAllPosts, formatDate } from '@/lib/posts';
-import { href, siteUrl } from '@/lib/url';
+import { href, canonicalUrl } from '@/lib/url';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Archive',
   description: 'Semua artikel di blog aixwim.',
-  alternates: { canonical: siteUrl + href('/posts/') },
+  alternates: { canonical: canonicalUrl('/posts/') },
 };
 
 export default function PostsPage() {

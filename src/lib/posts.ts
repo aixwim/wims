@@ -75,14 +75,3 @@ export function getAllTags(): { tag: string; count: number }[] {
 export function getPostsByTag(tag: string): Post[] {
   return getAllPosts().filter((p) => p.tags.includes(tag));
 }
-
-export function popularityOf(posts: Post[]) {
-  const bodyBySlug = new Map(posts.map((p) => [p.slug, p.body]));
-  return (post: Post) => {
-    let backlinks = 0;
-    for (const [slug, body] of bodyBySlug) {
-      if (slug !== post.slug && body.includes(`/posts/${post.slug}/`)) backlinks++;
-    }
-    return backlinks * 3 + Math.min(readingMin(post.body), 15);
-  };
-}

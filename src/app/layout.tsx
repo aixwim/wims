@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { href, siteUrl } from '@/lib/url';
+import { href, siteUrl, basePath, absoluteUrl } from '@/lib/url';
 
 export const metadata: Metadata = {
   title: {
@@ -10,14 +10,14 @@ export const metadata: Metadata = {
     template: '%s | aixwim',
   },
   description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.',
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteUrl + basePath),
   openGraph: {
     type: 'website',
     siteName: 'aixwim',
     locale: 'id_ID',
     images: [
       {
-        url: '/wims/og.png',
+        url: absoluteUrl('/og.png'),
         width: 1200,
         height: 630,
         alt: 'aixwim Blog',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/wims/favicon.svg',
+    icon: basePath + '/favicon.svg',
   },
 };
 
@@ -46,7 +46,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'aixwim',
-  url: siteUrl + '/wims/',
+  url: absoluteUrl('/'),
   description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.',
   publisher: {
     '@type': 'Person',
@@ -56,7 +56,7 @@ const jsonLd = {
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: siteUrl + '/wims/search/?q={search_term_string}',
+      urlTemplate: absoluteUrl('/search/') + '?q={search_term_string}',
     },
     'query-input': 'required name=search_term_string',
   },
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        <link rel="manifest" href={href('/manifest.json')} />
+        <link rel="manifest" href={basePath + '/manifest.json'} />
         <link rel="dns-prefetch" href="https://aixwim.disqus.com" />
         <link rel="preconnect" href="https://aixwim.disqus.com" crossOrigin="anonymous" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

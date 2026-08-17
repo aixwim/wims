@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { getAllPosts, formatDate } from '@/lib/posts';
-import { href, siteUrl } from '@/lib/url';
+import { href, canonicalUrl } from '@/lib/url';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'aixwim — Blog',
   description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.',
-  alternates: { canonical: siteUrl + href('/') },
-  openGraph: { url: siteUrl + href('/') },
+  alternates: { canonical: canonicalUrl('/') },
+  openGraph: { url: canonicalUrl('/') },
 };
 
 const categoryColors: Record<string, string> = {

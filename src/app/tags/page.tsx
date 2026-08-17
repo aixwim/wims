@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { getAllTags } from '@/lib/posts';
-import { href, siteUrl } from '@/lib/url';
+import { href, canonicalUrl } from '@/lib/url';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Tags',
   description: 'Semua tag di blog aixwim.',
-  alternates: { canonical: siteUrl + href('/tags/') },
+  alternates: { canonical: canonicalUrl('/tags/') },
 };
 
 export default function TagsPage() {

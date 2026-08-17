@@ -4,7 +4,7 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 
-  const links = [
+  const socialLinks = [
     {
       name: 'Twitter',
       href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
@@ -32,26 +32,15 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
         </svg>
       ),
     },
-    {
-      name: 'Copy',
-      href: '#',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-        </svg>
-      ),
-      onClick: () => navigator.clipboard.writeText(url),
-    },
   ];
 
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm text-gray-500 dark:text-gray-400">Share:</span>
-      {links.map((link) => (
+      {socialLinks.map((link) => (
         <a
           key={link.name}
           href={link.href}
-          onClick={link.onClick}
           target="_blank"
           rel="noopener noreferrer"
           className="p-2 text-gray-400 hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
@@ -60,6 +49,15 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
           {link.icon}
         </a>
       ))}
+      <button
+        onClick={() => navigator.clipboard.writeText(url)}
+        className="p-2 text-gray-400 hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+        aria-label="Copy link"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+        </svg>
+      </button>
     </div>
   );
 }
