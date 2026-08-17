@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { siteUrl, href } from '@/lib/url';
 
 export const metadata: Metadata = {
-  title: 'Cari Artikel',
+  title: 'Search',
   description: 'Cari artikel di blog aixwim.',
   alternates: { canonical: siteUrl + href('/search/') },
 };
@@ -19,8 +19,8 @@ export default function SearchPage() {
   }));
 
   return (
-    <section className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">Cari Artikel</h1>
+    <section>
+      <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">Search</h1>
       <SearchInner searchIndex={searchIndex} />
     </section>
   );

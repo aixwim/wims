@@ -10,49 +10,74 @@ export const metadata: Metadata = {
   openGraph: { url: siteUrl + href('/') },
 };
 
+const categoryColors: Record<string, string> = {
+  'Perkenalan': 'text-purple-600 dark:text-purple-400',
+  'Tutorial': 'text-blue-600 dark:text-blue-400',
+  'Tips': 'text-green-600 dark:text-green-400',
+  'SEO': 'text-orange-600 dark:text-orange-400',
+  'default': 'text-blue-600 dark:text-blue-400',
+};
+
 export default function HomePage() {
   const posts = getAllPosts();
-  const latest = posts.slice(0, 5);
+  const featured = posts.slice(0, 2);
+  const rest = posts.slice(2);
 
   return (
-    <section className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-4">
-        Halo, saya aixwim
-      </h1>
-      <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-        Saya menulis tentang teknologi, pengembangan web, dan hal-hal yang saya pelajari sepanjang perjalanan.
-      </p>
-
-      <div className="flex gap-4 mb-16">
-        <Link href={href('/posts/')} className="rounded-full bg-gray-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-gray-700 transition-colors">
-          Lihat Artikel
-        </Link>
-        <Link href={href('/about/')} className="rounded-full border border-gray-300 px-6 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors">
-          Tentang Saya
-        </Link>
+    <section>
+      {/* Featured posts - 2 column */}
+      <div className="grid gap-10 md:grid-cols-2 lg:gap-10 mb-10">
+        {featured.map((post) => (
+          <article key={post.slug} className="group cursor-pointer">
+            <Link href={href(`/posts/${post.slug}/`)}>
+              <div className="aspect-video bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden mb-4">
+                <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700" />
+              </div>
+              <p className={`text-xs font-medium tracking-wider uppercase mb-2 ${categoryColors[post.category || ''] || categoryColors.default}`}>
+                {post.category || 'Article'}
+              </p>
+              <h2 className="text-lg font-semibold leading-snug tracking-tight text-gray-900 dark:text-white group-hover:bg-gradient-to-r group-hover:from-green-200 group-hover:to-green-100 dark:group-hover:from-purple-800 dark:group-hover:to-purple-900 group-hover:bg-[length:100%_25%] group-hover:bg-no-repeat group-hover:bg-left-bottom transition-[background-size] duration-500">
+                {post.title}
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">{post.excerpt}</p>
+              <div className="flex items-center gap-2 mt-4 text-sm text-gray-500 dark:text-gray-400">
+                <span>aixwim</span>
+                <span className="text-gray-300 dark:text-gray-600">&middot;</span>
+                <span>{formatDate(post.date)}</span>
+              </div>
+            </Link>
+          </article>
+        ))}
       </div>
 
-      <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-6">Artikel Terbaru</h2>
-      <ul className="space-y-8">
-        {latest.map((post) => (
-          <li key={post.slug}>
-            <Link href={href(`/posts/${post.slug}/`)} className="group block">
-              <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                {post.title}
-              </h3>
-              <p className="text-sm text-gray-500 mt-1">
-                {formatDate(post.date)} &middot; {readingMin(post.body)} min read
+      {/* Grid posts - 2/3 column */}
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {rest.map((post) => (
+          <article key={post.slug} className="group cursor-pointer">
+            <Link href={href(`/posts/${post.slug}/`)}>
+              <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden mb-4">
+                <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 group-hover:scale-105 transition-all duration-300" />
+              </div>
+              <p className={`text-xs font-medium tracking-wider uppercase mb-2 ${categoryColors[post.category || ''] || categoryColors.default}`}>
+                {post.category || 'Article'}
               </p>
-              {post.excerpt && (
-                <p className="text-gray-600 mt-2 text-sm leading-relaxed">{post.excerpt}</p>
-              )}
+              <h2 className="text-lg font-semibold leading-snug tracking-tight text-gray-900 dark:text-white group-hover:bg-gradient-to-r group-hover:from-green-200 group-hover:to-green-100 dark:group-hover:from-purple-800 dark:group-hover:to-purple-900 group-hover:bg-[length:100%_25%] group-hover:bg-no-repeat group-hover:bg-left-bottom transition-[background-size] duration-500">
+                {post.title}
+              </h2>
+              <div className="flex items-center gap-2 mt-4 text-sm text-gray-500 dark:text-gray-400">
+                <span>aixwim</span>
+                <span className="text-gray-300 dark:text-gray-600">&middot;</span>
+                <span>{formatDate(post.date)}</span>
+              </div>
             </Link>
-          </li>
+          </article>
         ))}
-      </ul>
-      <div className="mt-8">
-        <Link href={href('/posts/')} className="text-sm font-semibold text-blue-600 hover:text-blue-500">
-          Lihat semua artikel &rarr;
+      </div>
+
+      {/* View all button */}
+      <div className="mt-10 flex justify-center">
+        <Link href={href('/posts/')} className="rounded-md border border-gray-300 dark:border-gray-500 bg-white dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          View all Posts &rarr;
         </Link>
       </div>
     </section>

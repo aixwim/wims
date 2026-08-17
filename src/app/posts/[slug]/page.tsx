@@ -51,19 +51,31 @@ export default async function PostPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <article className="mx-auto max-w-2xl px-6 py-16">
+      <article className="max-w-screen-md mx-auto">
         <header className="mb-10">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-2">{post.title}</h1>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-3">
             {formatDate(post.date)} &middot; {readingMin(post.body)} min read
           </p>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight mb-4">
+            {post.title}
+          </h1>
+          {post.excerpt && (
+            <p className="text-gray-500 dark:text-gray-400 text-lg leading-relaxed">{post.excerpt}</p>
+          )}
+          <div className="flex items-center gap-3 mt-6">
+            <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700" />
+            <div>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">aixwim</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{formatDate(post.date)}</p>
+            </div>
+          </div>
           {post.tags.length > 0 && (
-            <div className="mt-3 flex gap-2">
+            <div className="flex gap-2 mt-4">
               {post.tags.map((tag) => (
                 <Link
                   key={tag}
                   href={href(`/tags/${tag}/`)}
-                  className="text-xs font-medium text-gray-500 bg-gray-100 rounded-full px-2.5 py-0.5 hover:bg-gray-200 transition-colors"
+                  className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full px-3 py-1 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
                 >
                   {tag}
                 </Link>
@@ -71,12 +83,18 @@ export default async function PostPage({ params }: Props) {
             </div>
           )}
         </header>
-        <div className="prose prose-gray prose-headings:font-semibold prose-a:text-blue-600 prose-strong:text-gray-900 max-w-none">
+
+        <div className="aspect-video bg-gray-100 dark:bg-gray-800 rounded-md mb-10">
+          <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-md" />
+        </div>
+
+        <div className="prose prose-gray dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-gray-900 dark:prose-strong:text-white max-w-none">
           <MDXRemote source={post.body} />
         </div>
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <Link href={href('/posts/')} className="text-sm font-semibold text-blue-600 hover:text-blue-500">
-            &larr; Kembali ke semua artikel
+
+        <div className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800">
+          <Link href={href('/posts/')} className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors">
+            &larr; Back to all posts
           </Link>
         </div>
       </article>

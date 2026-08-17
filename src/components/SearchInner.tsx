@@ -21,28 +21,28 @@ export default function SearchInner({ searchIndex }: { searchIndex: Pick<Post, '
     <>
       <input
         type="search"
-        className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors mb-8"
-        placeholder="Ketik judul, tag, atau kata kunci..."
+        className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 text-sm text-gray-900 dark:text-white outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors mb-8"
+        placeholder="Search articles..."
         value={q}
         onChange={(e) => setQ(e.target.value)}
         autoFocus
       />
       {query && results.length === 0 && (
-        <p className="text-gray-500 text-center py-10">Tidak ditemukan artikel untuk &ldquo;{q}&rdquo;</p>
+        <p className="text-gray-500 dark:text-gray-400 text-center py-10">No articles found for &ldquo;{q}&rdquo;</p>
       )}
       {results.length > 0 && (
-        <ul className="space-y-6">
+        <div className="space-y-6">
           {results.map((post) => (
-            <li key={post.slug}>
-              <Link href={href(`/posts/${post.slug}/`)} className="group block">
-                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+            <article key={post.slug} className="group">
+              <Link href={href(`/posts/${post.slug}/`)} className="block">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
                   {post.title}
                 </h3>
-                <p className="text-sm text-gray-500 mt-1">{post.excerpt}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{post.excerpt}</p>
               </Link>
-            </li>
+            </article>
           ))}
-        </ul>
+        </div>
       )}
     </>
   );

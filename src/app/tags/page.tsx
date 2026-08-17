@@ -13,17 +13,16 @@ export default function TagsPage() {
   const tags = getAllTags();
 
   return (
-    <section className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-2">Tags</h1>
-      <p className="text-gray-600 mb-10">Semua topik yang dibahas di blog ini.</p>
+    <section>
+      <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">Tags</h1>
       <div className="flex flex-wrap gap-3">
         {tags.map(({ tag, count }) => (
           <Link
             key={tag}
             href={href(`/tags/${tag}/`)}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-full px-4 py-2 hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 rounded-full px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            {tag} <span className="text-gray-400">({count})</span>
+            {tag} <span className="text-gray-400 dark:text-gray-500">({count})</span>
           </Link>
         ))}
       </div>

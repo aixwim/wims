@@ -32,10 +32,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
-      <body className="bg-white text-gray-900 antialiased">
+    <html lang="id" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            var t = localStorage.getItem('theme');
+            if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+          })();
+        `}} />
+      </head>
+      <body className="bg-white dark:bg-black text-gray-800 dark:text-gray-400 antialiased">
         <Header />
-        <main className="min-h-screen">
+        <main className="container mx-auto px-8 max-w-screen-lg py-5 lg:py-8">
           {children}
         </main>
         <Footer />
