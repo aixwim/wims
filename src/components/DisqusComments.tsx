@@ -1,37 +1,34 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
-
-declare global {
-  interface Window {
-    DISQUS?: { reset: (config: { config: { page: { url: string; identifier: string } } }) => void };
-    disqus_config?: (this: { page: { url: string; identifier: string } }) => void;
-  }
-}
+import { useEffect, useRef } from 'react';
 
 export default function DisqusComments() {
   const pathname = usePathname();
+  const loaded = useRef(false);
 
   useEffect(() => {
+    if (loaded.current) return;
+    loaded.current = true;
+
     const pageUrl = `https://aixwim.github.io/wims${pathname}`;
 
-    if (window.DISQUS) {
-      window.DISQUS.reset({
-        config: { page: { url: pageUrl, identifier: pathname } },
-      });
-    } else {
-      window.disqus_config = function () {
-        this.page.url = pageUrl;
-        this.page.identifier = pathname;
-      };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).disqus_config = function () {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this as any).page = { url: pageUrl, identifier: pathname };
+    };
 
-      const d = document;
-      const s = d.createElement('script');
-      s.src = 'https://aixwim.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', String(+new Date()));
-      (d.head || d.body).appendChild(s);
-    }
+    const s = document.createElement('script');
+    s.src = 'https://aixwim.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', String(+new Date()));
+    s.async = true;
+    document.head.appendChild(s);
   }, [pathname]);
 
-  return <div id="disqus_thread" role="region" aria-label="Komentar Disqus" className="mt-12" />;
+  return (
+    <div className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Komentar</h2>
+      <div id="disqus_thread" />
+    </div>
+  );
 }
