@@ -1,42 +1,42 @@
+media:
+  input: public
+  output: /public
+
 content:
-  - label: Posts
-    name: posts
+  - name: posts
+    label: Posts
+    type: collection
     path: content
-    type: markdown
-    slug:
-      field: title
-      prefix: ""
+    format: yaml-frontmatter
+    filename: "{primary}.md"
     fields:
       - name: title
-        type: text
-        label: Title
+        type: string
         required: true
       - name: date
         type: date
-        label: Date
         required: true
       - name: category
-        type: text
-        label: Category
+        type: string
       - name: excerpt
-        type: textarea
-        label: Excerpt
-        required: true
-      - name: tags
-        type: list
-        label: Tags
-        field:
-          type: text
-      - name: meta_title
         type: text
-        label: Meta Title (SEO)
+        required: true
+        options:
+          maxlength: 200
+      - name: tags
+        type: string
+        list: true
+      - name: meta_title
+        type: string
+        description: "Custom title for SEO (optional)"
+      - name: body
+        type: rich-text
     view:
+      primary: title
+      sort: date
+      order: desc
       fields:
         - title
         - date
         - category
         - tags
-
-media:
-  path: public
-  output: public
