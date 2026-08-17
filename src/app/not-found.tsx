@@ -6,7 +6,7 @@ export default function NotFound() {
     <section className="max-w-screen-md mx-auto py-20 text-center">
       <p className="text-gradient text-7xl font-extrabold tracking-tight mb-4">404</p>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Halaman tidak ditemukan</h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-8">
+      <p className="text-gray-600 dark:text-gray-400 mb-8">
         Halaman yang kamu cari tidak ada atau sudah dipindahkan.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">

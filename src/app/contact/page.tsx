@@ -23,7 +23,7 @@ export default function ContactPage() {
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Mari Terhubung
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 max-w-xl">
+        <p className="text-gray-600 dark:text-gray-400 max-w-xl">
           Ada pertanyaan, saran, atau ingin berkolaborasi? Jangan ragu untuk menghubungi saya.
         </p>
       </header>
@@ -40,7 +40,7 @@ export default function ContactPage() {
           </span>
           <div>
             <h2 className="font-bold text-gray-900 dark:text-white mb-1">Email</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 break-all">hello@aixwim.dev</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 break-all">hello@aixwim.dev</p>
           </div>
         </a>
 
@@ -57,12 +57,12 @@ export default function ContactPage() {
           </span>
           <div>
             <h2 className="font-bold text-gray-900 dark:text-white mb-1">GitHub</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">github.com/aixwim</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">github.com/aixwim</p>
           </div>
         </a>
       </div>
 
-      <div className="mt-8 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-violet-500/5 dark:from-indigo-900/20 dark:to-violet-900/20 border border-gray-100 dark:border-gray-800 p-6 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+      <div className="mt-8 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-violet-500/5 dark:from-indigo-900/20 dark:to-violet-900/20 border border-gray-100 dark:border-gray-800 p-6 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
         Saya biasanya merespons dalam 1–2 hari kerja. Untuk laporan bug atau pertanyaan teknis yang mendesak, email adalah cara tercepat untuk menghubungi saya.
       </div>
     </section>

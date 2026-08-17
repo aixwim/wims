@@ -110,7 +110,7 @@ export default async function PostPage({ params }: Props) {
 
         <article className="max-w-screen-md flex-1 min-w-0 mx-auto">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 mb-6 flex-wrap" aria-label="Breadcrumb">
+          <nav className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-500 mb-6 flex-wrap" aria-label="Breadcrumb">
             <Link href={href('/')} prefetch={false} className="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Home</Link>
             <span aria-hidden="true">/</span>
             <Link href={href('/posts/')} prefetch={false} className="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Posts</Link>
@@ -120,7 +120,7 @@ export default async function PostPage({ params }: Props) {
 
           {/* Header */}
           <header className="mb-8">
-            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
               {post.category && (
                 <Link
                   href={href(`/tags/${post.category.toLowerCase()}/`)}
@@ -140,7 +140,7 @@ export default async function PostPage({ params }: Props) {
             </h1>
 
             {post.excerpt && (
-              <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-6">{post.excerpt}</p>
+              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{post.excerpt}</p>
             )}
 
             {/* Author + Share */}
@@ -153,7 +153,7 @@ export default async function PostPage({ params }: Props) {
                   <Link href={href('/about/')} prefetch={false} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
                     aixwim
                   </Link>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Web Developer &amp; Content Creator</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Web Developer &amp; Content Creator</p>
                 </div>
               </div>
               <ShareButtons title={post.title} url={url} />
@@ -206,7 +206,7 @@ export default async function PostPage({ params }: Props) {
             </span>
             <div>
               <p className="font-bold text-gray-900 dark:text-white mb-1">Ditulis oleh aixwim</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 Seorang web developer yang suka berbagi pengetahuan tentang teknologi, SEO, dan pengembangan web. Semoga artikel ini bermanfaat untukmu!
               </p>
             </div>
@@ -215,7 +215,7 @@ export default async function PostPage({ params }: Props) {
           {/* Share bottom */}
           <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
             <ShareButtons title={post.title} url={url} />
-            <Link href={href('/posts/')} prefetch={false} className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+            <Link href={href('/posts/')} prefetch={false} className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
               Semua artikel &rarr;
             </Link>
           </div>
@@ -224,7 +224,7 @@ export default async function PostPage({ params }: Props) {
           <nav className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4" aria-label="Navigasi artikel">
             {prevPost ? (
               <Link href={href(`/posts/${prevPost.slug}/`)} prefetch={false} className="group card card-hover p-5">
-                <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1 mb-2">
+                <span className="text-xs text-gray-600 dark:text-gray-500 flex items-center gap-1 mb-2">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
                   Artikel sebelumnya
                 </span>
@@ -235,7 +235,7 @@ export default async function PostPage({ params }: Props) {
             ) : <span />}
             {nextPost && (
               <Link href={href(`/posts/${nextPost.slug}/`)} prefetch={false} className="group card card-hover p-5 text-right">
-                <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center justify-end gap-1 mb-2">
+                <span className="text-xs text-gray-600 dark:text-gray-500 flex items-center justify-end gap-1 mb-2">
                   Artikel berikutnya
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                 </span>

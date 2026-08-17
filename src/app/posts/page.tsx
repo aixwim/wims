@@ -22,7 +22,7 @@ export default function PostsPage() {
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Semua Artikel
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 max-w-xl">
+        <p className="text-gray-600 dark:text-gray-400 max-w-xl">
           {posts.length} artikel yang ditulis untuk berbagi pengetahuan tentang teknologi dan pengembangan web.
         </p>
       </header>
@@ -37,7 +37,7 @@ export default function PostsPage() {
             className="badge bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
           >
             #{tag}
-            <span className="text-xs text-gray-400 dark:text-gray-500">{count}</span>
+            <span className="text-xs text-gray-600 dark:text-gray-500">{count}</span>
           </Link>
         ))}
       </div>
@@ -47,7 +47,7 @@ export default function PostsPage() {
         const yearPosts = posts.filter((p) => p.date.getFullYear() === year);
         return (
           <div key={year} className="mb-12">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-600 dark:text-gray-500 mb-6">
               {year}
             </h2>
             <div className="space-y-2">
@@ -58,7 +58,7 @@ export default function PostsPage() {
                   prefetch={false}
                   className={`group flex items-baseline gap-4 rounded-xl px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900 ${i !== yearPosts.length - 1 ? 'border-b border-gray-100 dark:border-gray-800' : ''}`}
                 >
-                  <time className="text-xs text-gray-400 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
+                  <time className="text-xs text-gray-600 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
                     {post.date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' })}
                   </time>
                   <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">

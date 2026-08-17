@@ -13,7 +13,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Logo />
-            <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
               Blog pribadi tentang teknologi, pengembangan web, dan catatan harian untuk berbagi pengetahuan yang bermanfaat.
             </p>
             <div className="flex items-center gap-3">
@@ -78,7 +78,7 @@ export default function Footer() {
                 <li key={tag}>
                   <Link href={href(`/tags/${tag}/`)} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
                     <span>#{tag}</span>
-                    <span className="text-xs text-gray-400 dark:text-gray-600">({count})</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">({count})</span>
                   </Link>
                 </li>
               ))}
@@ -88,7 +88,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-gray-100 dark:border-gray-800 text-center sm:text-left">
-          <p className="text-sm text-gray-400 dark:text-gray-500">{new Date().getFullYear()} aixwim.dev</p>
+          <p className="text-sm text-gray-600 dark:text-gray-500">{new Date().getFullYear()} aixwim.dev</p>
         </div>
       </div>
     </footer>

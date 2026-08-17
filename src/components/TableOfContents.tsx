@@ -27,7 +27,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
   return (
     <aside className="hidden lg:block w-60 shrink-0">
       <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-auto rounded-xl border border-gray-100 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60 p-4">
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-3">
+        <p className="text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-500 mb-3">
           Daftar Isi
         </p>
         <nav className="space-y-1" aria-label="Daftar isi">

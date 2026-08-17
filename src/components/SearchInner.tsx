@@ -40,14 +40,14 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
 
       {query && results.length === 0 && (
         <div className="text-center py-14">
-          <p className="text-gray-400 dark:text-gray-500 mb-2 text-5xl" aria-hidden="true">&#128269;</p>
-          <p className="text-gray-500 dark:text-gray-400">Tidak ada artikel untuk &ldquo;{q}&rdquo;</p>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Coba kata kunci lain.</p>
+          <p className="text-gray-600 dark:text-gray-500 mb-2 text-5xl" aria-hidden="true">&#128269;</p>
+          <p className="text-gray-600 dark:text-gray-400">Tidak ada artikel untuk &ldquo;{q}&rdquo;</p>
+          <p className="text-sm text-gray-600 dark:text-gray-500 mt-1">Coba kata kunci lain.</p>
         </div>
       )}
 
       {query && results.length > 0 && (
-        <p className="text-sm text-gray-400 dark:text-gray-500 mb-4">
+        <p className="text-sm text-gray-600 dark:text-gray-500 mb-4">
           {results.length} hasil untuk &ldquo;{q}&rdquo;
         </p>
       )}
@@ -61,16 +61,16 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
               prefetch={false}
               className="group block rounded-xl px-4 py-3 border border-gray-100 dark:border-gray-800 hover:border-indigo-200 dark:hover:border-indigo-900 hover:shadow-md hover:-translate-y-0.5 transition-all"
             >
-              <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 mb-1.5">
+              <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-500 mb-1.5">
                 <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
                 {post.tags.slice(0, 3).map((tag) => (
-                  <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">#{tag}</span>
+                  <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">#{tag}</span>
                 ))}
               </div>
               <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
                 {post.title}
               </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">{post.excerpt}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">{post.excerpt}</p>
             </Link>
           ))}
         </div>

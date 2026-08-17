@@ -33,7 +33,7 @@ export default async function TagPage({ params }: Props) {
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           #{tag}
         </h1>
-        <p className="text-gray-500 dark:text-gray-400">{posts.length} artikel dengan tag ini.</p>
+        <p className="text-gray-600 dark:text-gray-400">{posts.length} artikel dengan tag ini.</p>
       </header>
 
       <div className="space-y-2">
@@ -44,7 +44,7 @@ export default async function TagPage({ params }: Props) {
             prefetch={false}
             className={`group flex items-baseline gap-4 rounded-xl px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900 ${i !== posts.length - 1 ? 'border-b border-gray-100 dark:border-gray-800' : ''}`}
           >
-            <time className="text-xs text-gray-400 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
+            <time className="text-xs text-gray-600 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
               {formatDate(post.date)}
             </time>
             <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">

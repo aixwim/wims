@@ -41,7 +41,7 @@ function PostCard({ post, featured }: { post: ReturnType<typeof getAllPosts>[num
           </div>
         </div>
         <div className={`p-5 ${featured ? 'md:p-6' : ''}`}>
-          <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 mb-2.5">
+          <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-500 mb-2.5">
             <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
             <span className="text-gray-300 dark:text-gray-600">&middot;</span>
             <span>{readingMin(post.body)} min baca</span>
@@ -49,7 +49,7 @@ function PostCard({ post, featured }: { post: ReturnType<typeof getAllPosts>[num
           <h2 className={`font-bold tracking-tight text-gray-900 dark:text-white leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors ${featured ? 'text-xl md:text-2xl mb-2.5' : 'text-base mb-2'}`}>
             {post.title}
           </h2>
-          {featured && <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{post.excerpt}</p>}
+          {featured && <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{post.excerpt}</p>}
           <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 dark:text-indigo-300">
             Baca selengkapnya
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
@@ -86,7 +86,7 @@ export default function HomePage() {
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight mb-5">
             Belajar Teknologi & <span className="text-gradient">Web Development</span>
           </h1>
-          <p className="text-base md:text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
             Kumpulan artikel tentang pengembangan web, SEO, dan teknologi — ditulis dengan bahasa yang mudah dipahami untuk pemula hingga menengah.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -103,17 +103,17 @@ export default function HomePage() {
           <div className="mt-10 flex items-center justify-center gap-8 text-center">
             <div>
               <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{posts.length}+</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Artikel</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Artikel</p>
             </div>
             <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
             <div>
               <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{tags.length}+</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Topik</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Topik</p>
             </div>
             <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
             <div>
               <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{Math.ceil(totalReadMins / 60)}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Jam Membaca</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Jam Membaca</p>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function HomePage() {
                 className="badge bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
               >
                 #{tag}
-                <span className="text-xs text-gray-400 dark:text-gray-500">{count}</span>
+                <span className="text-xs text-gray-600 dark:text-gray-500">{count}</span>
               </Link>
             ))}
           </div>
@@ -167,7 +167,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-violet-500/5 to-cyan-500/5 pointer-events-none" aria-hidden="true" />
         <div className="relative">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">Suka dengan konten ini?</h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-lg mx-auto mb-6">
+          <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-6">
             Jelajahi semua artikel dan temukan topik yang paling menarik untukmu.
           </p>
           <Link href={href('/posts/')} prefetch={false} className="btn btn-primary">

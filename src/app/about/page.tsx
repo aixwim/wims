@@ -33,7 +33,7 @@ export default function AboutPage() {
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Halo, saya <span className="text-gradient">aixwim</span>
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 max-w-lg mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
           Web developer yang suka berbagi ilmu lewat tulisan.
         </p>
       </header>
@@ -61,7 +61,7 @@ export default function AboutPage() {
               {f.icon}
             </svg>
             <h3 className="font-bold text-gray-900 dark:text-white mb-1">{f.title}</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400">{f.desc}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">{f.desc}</p>
           </div>
         ))}
       </div>

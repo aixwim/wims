@@ -19,7 +19,7 @@ export default function TagsPage() {
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Jelajahi Tag
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 max-w-xl">
+        <p className="text-gray-600 dark:text-gray-400 max-w-xl">
           Temukan artikel berdasarkan topik yang kamu minati.
         </p>
       </header>
@@ -49,7 +49,7 @@ export default function TagsPage() {
                 <span className={`h-2.5 w-2.5 rounded-full bg-gradient-to-br ${gradients[i % 4].split(' ')[0]} group-hover:scale-125 transition-transform`} aria-hidden="true" />
                 <span className={`font-bold ${textColors[i % 4]}`}>#{tag}</span>
               </span>
-              <span className="text-sm text-gray-400 dark:text-gray-500">{count} artikel</span>
+              <span className="text-sm text-gray-600 dark:text-gray-500">{count} artikel</span>
             </Link>
           );
         })}

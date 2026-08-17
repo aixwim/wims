@@ -26,7 +26,7 @@ export default function SearchPage() {
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Cari Artikel
         </h1>
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-gray-600 dark:text-gray-400">
           Ketik kata kunci untuk menemukan artikel yang kamu butuhkan.
         </p>
       </header>

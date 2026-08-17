@@ -27,7 +27,7 @@ export default function RelatedPosts({ posts }: { posts: Post[] }) {
             >
               <div className={`h-1.5 bg-gradient-to-r ${gradients[gradient]}`} aria-hidden="true" />
               <div className="p-5">
-                <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 mb-2">
+                <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-500 mb-2">
                   <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
                   <span aria-hidden="true">&middot;</span>
                   <span>{readingMin(post.body)} min</span>
@@ -35,7 +35,7 @@ export default function RelatedPosts({ posts }: { posts: Post[] }) {
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
                   {post.title}
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5 line-clamp-2">{post.excerpt}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 line-clamp-2">{post.excerpt}</p>
               </div>
             </Link>
           );
