@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import { getPostBySlug, getAllPosts, getAdjacentPosts, formatDate, readingMin } from '@/lib/posts';
 import { href, canonicalUrl, absoluteUrl } from '@/lib/url';
-import DisqusComments from '@/components/DisqusComments';
+import GiscusComments from '@/components/GiscusComments';
 import ShareButtons from '@/components/ShareButtons';
 import RelatedPosts from '@/components/RelatedPosts';
 import ReadingProgress from '@/components/ReadingProgress';
@@ -252,8 +252,8 @@ export default async function PostPage({ params }: Props) {
           {/* Related posts */}
           <RelatedPosts posts={relatedPosts} />
 
-          {/* Disqus */}
-          <DisqusComments slug={slug} />
+          {/* Komentar */}
+          <GiscusComments />
         </article>
       </div>
 
