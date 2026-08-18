@@ -2,11 +2,15 @@
 import { useEffect, useRef } from 'react';
 
 const GISCUS_BASE = 'https://giscus.app';
+const SITE_BASE = 'https://aixwim.github.io/wims';
 
 export default function GiscusComments() {
   const scriptRef = useRef<HTMLScriptElement | null>(null);
 
   useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    const theme = isDark ? `${SITE_BASE}/giscus-dark.css` : `${SITE_BASE}/giscus-light.css`;
+
     const script = document.createElement('script');
     script.src = `${GISCUS_BASE}/client.js`;
     script.async = true;
@@ -20,19 +24,19 @@ export default function GiscusComments() {
     script.setAttribute('data-reactions-enabled', '1');
     script.setAttribute('data-emit-metadata', '0');
     script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-theme', document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'transparent_light');
+    script.setAttribute('data-theme', theme);
     script.setAttribute('data-lang', 'id');
     script.setAttribute('data-loading', 'lazy');
     scriptRef.current = script;
     document.head.appendChild(script);
 
     const sendTheme = () => {
-      const theme = document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'transparent_light';
-      script.setAttribute('data-theme', theme);
+      const next = document.documentElement.classList.contains('dark') ? `${SITE_BASE}/giscus-dark.css` : `${SITE_BASE}/giscus-light.css`;
+      script.setAttribute('data-theme', next);
       const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
       if (iframe) {
         iframe.contentWindow?.postMessage(
-          { giscus: { setConfig: { theme } } },
+          { giscus: { setConfig: { theme: next } } },
           GISCUS_BASE
         );
       }
