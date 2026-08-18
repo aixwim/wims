@@ -35,7 +35,7 @@ export default function PostsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       {/* Header */}
       <header className="mb-10">
-        <span className="badge bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 mb-4">Arsip</span>
+        <span className="badge bg-brand/15 text-brand mb-4">Arsip</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Semua Artikel
         </h1>
@@ -51,7 +51,7 @@ export default function PostsPage() {
             key={tag}
             href={href(`/tags/${tag}/`)}
             prefetch={false}
-            className="badge bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
+            className="badge bg-gray-100 text-gray-700 hover:bg-brand/20 hover:text-brand dark:bg-gray-800 dark:text-gray-300 transition-colors"
           >
             {tag}
             <span className="text-xs text-gray-600 dark:text-gray-500">{count}</span>
@@ -78,10 +78,10 @@ export default function PostsPage() {
                   <time className="text-xs text-gray-600 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
                     {post.date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' })}
                   </time>
-                  <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
+                  <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-brand transition-colors leading-snug">
                     {post.title}
                   </span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 ml-auto text-gray-300 dark:text-gray-600 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all shrink-0" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 ml-auto text-gray-300 dark:text-gray-600 group-hover:text-brand group-hover:translate-x-0.5 transition-all shrink-0" aria-hidden="true">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
                 </Link>

@@ -115,9 +115,9 @@ export default async function PostPage({ params }: Props) {
         <article className="max-w-screen-md flex-1 min-w-0 mx-auto">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-500 mb-6 flex-wrap" aria-label="Breadcrumb">
-            <Link href={href('/')} prefetch={false} className="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Home</Link>
+            <Link href={href('/')} prefetch={false} className="hover:text-brand transition-colors">Home</Link>
             <span aria-hidden="true">/</span>
-            <Link href={href('/posts/')} prefetch={false} className="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Posts</Link>
+            <Link href={href('/posts/')} prefetch={false} className="hover:text-brand transition-colors">Posts</Link>
             <span aria-hidden="true">/</span>
             <span className="text-gray-600 dark:text-gray-300 line-clamp-1">{post.title}</span>
           </nav>
@@ -129,7 +129,7 @@ export default async function PostPage({ params }: Props) {
                 <Link
                   href={href(`/tags/${post.category.toLowerCase()}/`)}
                   prefetch={false}
-                  className="badge bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 transition-colors"
+                  className="badge bg-brand/15 text-brand hover:bg-brand/25 dark:bg-brand/15 dark:text-brand dark:hover:bg-brand/25 transition-colors"
                 >
                   {post.category}
                 </Link>
@@ -150,11 +150,11 @@ export default async function PostPage({ params }: Props) {
             {/* Author + Share */}
             <div className="flex flex-wrap items-center justify-between gap-4 py-5 border-y border-gray-100 dark:border-gray-800">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold text-sm">
+                <span className="w-10 h-10 rounded-full bg-gradient-to-br from-brand to-brand2 flex items-center justify-center text-white font-bold text-sm">
                   a
                 </span>
                 <div>
-                  <Link href={href('/about/')} prefetch={false} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+                  <Link href={href('/about/')} prefetch={false} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-brand transition-colors">
                     aixwim
                   </Link>
                   <p className="text-xs text-gray-600 dark:text-gray-400">Web Developer &amp; Content Creator</p>
@@ -171,7 +171,7 @@ export default async function PostPage({ params }: Props) {
                     key={tag}
                     href={href(`/tags/${tag}/`)}
                     prefetch={false}
-                    className="text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1.5 hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
+                    className="text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1.5 hover:bg-brand/20 hover:text-brand transition-colors"
                   >
                     {tag}
                   </Link>
@@ -190,7 +190,7 @@ export default async function PostPage({ params }: Props) {
               className="aspect-[16/9] w-full object-cover rounded-2xl mb-10"
             />
           ) : (
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-10 bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-500">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-10 bg-gradient-to-br from-brand via-brand2 to-brand2">
               <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.35) 0, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.25) 0, transparent 40%)' }} aria-hidden="true" />
               <span className="absolute bottom-4 left-4 text-white font-extrabold tracking-tight text-2xl md:text-3xl drop-shadow-lg px-2">
                 {post.title}
@@ -204,8 +204,8 @@ export default async function PostPage({ params }: Props) {
           </div>
 
           {/* Author box */}
-          <div className="mt-12 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gradient-to-br from-indigo-50/60 to-violet-50/60 dark:from-gray-900 dark:to-gray-900 p-6 flex flex-col sm:flex-row gap-4 items-start">
-            <span className="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold text-xl shrink-0">
+          <div className="mt-12 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gradient-to-br from-brand/10 to-brand2/10 dark:from-gray-900 dark:to-gray-900 p-6 flex flex-col sm:flex-row gap-4 items-start">
+            <span className="w-14 h-14 rounded-full bg-gradient-to-br from-brand to-brand2 flex items-center justify-center text-white font-bold text-xl shrink-0">
               a
             </span>
             <div>
@@ -219,7 +219,7 @@ export default async function PostPage({ params }: Props) {
           {/* Share bottom */}
           <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
             <ShareButtons title={post.title} url={url} />
-            <Link href={href('/posts/')} prefetch={false} className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+            <Link href={href('/posts/')} prefetch={false} className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand transition-colors">
               Semua artikel &rarr;
             </Link>
           </div>
@@ -232,7 +232,7 @@ export default async function PostPage({ params }: Props) {
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
                   Artikel sebelumnya
                 </span>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2">
+                <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-brand transition-colors line-clamp-2">
                   {prevPost.title}
                 </span>
               </Link>
@@ -243,7 +243,7 @@ export default async function PostPage({ params }: Props) {
                   Artikel berikutnya
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                 </span>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2">
+                <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-brand transition-colors line-clamp-2">
                   {nextPost.title}
                 </span>
               </Link>

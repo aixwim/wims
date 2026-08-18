@@ -39,7 +39,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
                 h.level === 3 ? 'ml-3' : ''
               } ${
                 activeId === h.id
-                  ? 'bg-indigo-50 text-indigo-600 font-medium dark:bg-indigo-900/30 dark:text-indigo-300'
+                  ? 'bg-brand/20 text-brand font-medium'
                   : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800'
               }`}
             >

@@ -113,7 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="min-h-screen bg-gray-950 text-gray-300 antialiased flex flex-col">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] bg-indigo-600 text-white px-4 py-2 rounded-md">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] bg-brand text-white px-4 py-2 rounded-md">
           Lewati ke konten
         </a>
         <Header

@@ -46,7 +46,7 @@ export default async function TagPage({ params }: Props) {
     <section className="max-w-screen-md">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <header className="mb-10">
-        <span className="badge bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-300 mb-4">Tag</span>
+        <span className="badge bg-brand/15 text-brand mb-4">Tag</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           {tag}
         </h1>
@@ -64,10 +64,10 @@ export default async function TagPage({ params }: Props) {
             <time className="text-xs text-gray-600 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block" dateTime={post.date.toISOString()}>
               {formatDate(post.date)}
             </time>
-            <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
+            <span className="text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-brand transition-colors leading-snug">
               {post.title}
             </span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 ml-auto text-gray-300 dark:text-gray-600 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 ml-auto text-gray-300 dark:text-gray-600 group-hover:text-brand group-hover:translate-x-0.5 transition-all shrink-0" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </Link>
@@ -75,7 +75,7 @@ export default async function TagPage({ params }: Props) {
       </div>
 
       <div className="mt-10">
-        <Link href={href('/tags/')} prefetch={false} className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-300 hover:underline underline-offset-4">
+        <Link href={href('/tags/')} prefetch={false} className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:underline underline-offset-4">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
           Semua tag
         </Link>

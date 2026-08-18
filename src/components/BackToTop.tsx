@@ -15,7 +15,7 @@ export default function BackToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-6 right-6 z-50 p-3 bg-gradient-to-br from-indigo-500 to-violet-500 text-white rounded-full shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:scale-105 transition-all"
+      className="fixed bottom-6 right-6 z-50 p-3 bg-gradient-to-br from-brand to-brand2 text-white rounded-full shadow-lg shadow-brand/30 hover:shadow-xl hover:scale-105 transition-all"
       aria-label="Kembali ke atas"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">

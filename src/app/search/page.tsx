@@ -22,7 +22,7 @@ export default function SearchPage() {
   return (
     <section className="max-w-screen-md mx-auto">
       <header className="mb-8">
-        <span className="badge bg-cyan-50 text-cyan-600 dark:bg-cyan-900/30 dark:text-cyan-300 mb-4">Pencarian</span>
+        <span className="badge bg-brand/15 text-brand mb-4">Pencarian</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Cari Artikel
         </h1>

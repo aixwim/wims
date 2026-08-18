@@ -49,11 +49,11 @@ function PostCard({ post, featured }: { post: ReturnType<typeof getAllPosts>[num
             <span className="text-gray-300 dark:text-gray-600">&middot;</span>
             <span>{readingMin(post.body)} min baca</span>
           </div>
-          <h2 className={`font-bold tracking-tight text-gray-900 dark:text-white leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors ${featured ? 'text-xl md:text-2xl mb-2.5' : 'text-base mb-2'}`}>
+          <h2 className={`font-bold tracking-tight text-gray-900 dark:text-white leading-snug group-hover:text-brand transition-colors ${featured ? 'text-xl md:text-2xl mb-2.5' : 'text-base mb-2'}`}>
             {post.title}
           </h2>
           {featured && <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{post.excerpt}</p>}
-          <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 dark:text-indigo-300">
+          <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
             Baca selengkapnya
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" />
@@ -77,12 +77,12 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden py-10 md:py-16 mb-8">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl" />
-          <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-violet-500/5 blur-3xl" />
+          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
+          <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-brand2/10 blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-brand2/5 blur-3xl" />
         </div>
         <div className="relative mx-auto max-w-2xl text-center">
-          <span className="badge bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 mb-6">
+          <span className="badge bg-brand/15 text-brand mb-6">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
             Selamat datang di blog saya
           </span>
@@ -127,7 +127,7 @@ export default function HomePage() {
         <section className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Artikel Pilihan</h2>
-            <Link href={href('/posts/')} prefetch={false} className="text-sm font-semibold text-indigo-600 dark:text-indigo-300 hover:underline underline-offset-4">
+            <Link href={href('/posts/')} prefetch={false} className="text-sm font-semibold text-brand hover:underline underline-offset-4">
               Lihat semua
             </Link>
           </div>
@@ -155,7 +155,7 @@ export default function HomePage() {
                 key={tag}
                 href={href(`/tags/${tag}/`)}
                 prefetch={false}
-                className="badge bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
+                className="badge bg-gray-100 text-gray-700 hover:bg-brand/20 hover:text-brand dark:bg-gray-800 dark:text-gray-300 transition-colors"
               >
                 {tag}
                 <span className="text-xs text-gray-600 dark:text-gray-500">{count}</span>
@@ -167,7 +167,7 @@ export default function HomePage() {
 
       {/* Newsletter CTA */}
       <section className="card p-8 md:p-10 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-violet-500/5 to-cyan-500/5 pointer-events-none" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-br from-brand/5 via-brand2/5 to-brand2/5 pointer-events-none" aria-hidden="true" />
         <div className="relative">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">Suka dengan konten ini?</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-6">

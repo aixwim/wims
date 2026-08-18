@@ -33,7 +33,7 @@ export default function ContactPage() {
           href="mailto:hello@aixwim.dev"
           className="group card card-hover p-6 flex items-start gap-4"
         >
-          <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 group-hover:scale-105 transition-transform">
+          <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand/15 text-brand group-hover:scale-105 transition-transform">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-6 w-6" aria-hidden="true">
               <rect x="2" y="4" width="20" height="16" rx="2" /><path d="M22 6l-10 7L2 6" />
             </svg>
@@ -62,7 +62,7 @@ export default function ContactPage() {
         </a>
       </div>
 
-      <div className="mt-8 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-violet-500/5 dark:from-indigo-900/20 dark:to-violet-900/20 border border-gray-100 dark:border-gray-800 p-6 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+      <div className="mt-8 rounded-2xl bg-gradient-to-br from-brand/10 to-brand2/10 dark:from-brand/10 dark:to-brand2/10 border border-gray-100 dark:border-gray-800 p-6 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
         Saya biasanya merespons dalam 1–2 hari kerja. Untuk laporan bug atau pertanyaan teknis yang mendesak, email adalah cara tercepat untuk menghubungi saya.
       </div>
     </section>

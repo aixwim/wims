@@ -31,7 +31,7 @@ export default function TagsPage() {
     <section className="max-w-screen-md">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <header className="mb-10">
-        <span className="badge bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-300 mb-4">Topik</span>
+        <span className="badge bg-brand/15 text-brand mb-4">Topik</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
           Jelajahi Tag
         </h1>
@@ -49,7 +49,7 @@ export default function TagsPage() {
             'from-violet-50 to-fuchsia-50 dark:from-violet-900/20 dark:to-fuchsia-900/20',
           ];
           const textColors = [
-            'text-indigo-600 dark:text-indigo-300',
+            'text-brand',
             'text-cyan-600 dark:text-cyan-300',
             'text-emerald-600 dark:text-emerald-300',
             'text-violet-600 dark:text-violet-300',

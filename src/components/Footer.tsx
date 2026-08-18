@@ -68,7 +68,7 @@ export default function Footer() {
                 { href: href('/search/'), label: 'Cari' },
               ].map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} prefetch={false} className="text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
+                  <Link href={l.href} prefetch={false} className="text-gray-500 hover:text-brand dark:text-gray-400 dark:hover:text-brand transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -82,7 +82,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               {tags.map(({ tag, count }) => (
                 <li key={tag}>
-                  <Link href={href(`/tags/${tag}/`)} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
+                  <Link href={href(`/tags/${tag}/`)} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-brand dark:text-gray-400 dark:hover:text-brand transition-colors">
                     <span>{tag}</span>
                     <span className="text-xs text-gray-500 dark:text-gray-400">({count})</span>
                   </Link>
@@ -97,7 +97,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               {networkLinks.map((s) => (
                 <li key={s.repo}>
-                  <Link href={`${siteUrl}/${s.repo}/`} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
+                  <Link href={`${siteUrl}/${s.repo}/`} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-brand dark:text-gray-400 dark:hover:text-brand transition-colors">
                     <span>{s.name}</span>
                     <span className="text-xs text-gray-500 dark:text-gray-400">({s.categoryLabel})</span>
                   </Link>

@@ -30,7 +30,7 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
         <input
           id="search-input"
           type="search"
-          className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 pl-12 pr-4 py-3.5 text-sm text-gray-900 dark:text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 transition-all placeholder:text-gray-400"
+          className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 pl-12 pr-4 py-3.5 text-sm text-gray-900 dark:text-white outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all placeholder:text-gray-400"
           placeholder="Cari judul, isi, atau tag..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -59,7 +59,7 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
               key={post.slug}
               href={href(`/posts/${post.slug}/`)}
               prefetch={false}
-              className="group block rounded-xl px-4 py-3 border border-gray-100 dark:border-gray-800 hover:border-indigo-200 dark:hover:border-indigo-900 hover:shadow-md hover:-translate-y-0.5 transition-all"
+              className="group block rounded-xl px-4 py-3 border border-gray-100 dark:border-gray-800 hover:border-brand/50 dark:hover:border-brand/50 hover:shadow-md hover:-translate-y-0.5 transition-all"
             >
               <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-500 mb-1.5">
                 <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
@@ -67,7 +67,7 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
                   <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">{tag}</span>
                 ))}
               </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
+              <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-brand transition-colors">
                 {post.title}
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">{post.excerpt}</p>

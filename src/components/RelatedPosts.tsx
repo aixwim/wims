@@ -32,7 +32,7 @@ export default function RelatedPosts({ posts }: { posts: Post[] }) {
                   <span aria-hidden="true">&middot;</span>
                   <span>{readingMin(post.body)} min</span>
                 </div>
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-brand transition-colors line-clamp-2 leading-snug">
                   {post.title}
                 </h3>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 line-clamp-2">{post.excerpt}</p>

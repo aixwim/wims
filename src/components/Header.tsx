@@ -64,7 +64,7 @@ export default function Header({ siteName, logoText, logoPrefix }: { siteName: s
                   aria-current={active ? 'page' : undefined}
                   className={`rounded-lg px-3 py-2 transition-colors ${
                     active
-                      ? 'bg-indigo-900/30 text-indigo-300'
+                      ? 'bg-brand/30 text-brand'
                       : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
@@ -133,7 +133,7 @@ export default function Header({ siteName, logoText, logoPrefix }: { siteName: s
                   aria-current={active ? 'page' : undefined}
                   className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${
                     active
-                      ? 'bg-indigo-900/30 text-indigo-300'
+                      ? 'bg-brand/30 text-brand'
                       : 'text-gray-300 hover:bg-gray-800'
                   }`}
                   onClick={() => setMobileOpen(false)}

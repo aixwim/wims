@@ -27,7 +27,7 @@ export default function AboutPage() {
     <section className="max-w-screen-md mx-auto">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="mb-10 text-center">
-        <span className="inline-flex h-20 w-20 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-500 items-center justify-center text-white text-3xl font-extrabold shadow-lg shadow-indigo-500/30 mb-5">
+        <span className="inline-flex h-20 w-20 rounded-full bg-gradient-to-br from-brand via-brand2 to-brand2 items-center justify-center text-white text-3xl font-extrabold shadow-lg shadow-brand/30 mb-5">
           a
         </span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
@@ -57,7 +57,7 @@ export default function AboutPage() {
           { icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />, title: 'Berkarya', desc: 'Membangun web yang cepat & ringan' },
         ].map((f) => (
           <div key={f.title} className="card card-hover p-5 text-center">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-8 w-8 mx-auto text-indigo-500 mb-3" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-8 w-8 mx-auto text-brand mb-3" aria-hidden="true">
               {f.icon}
             </svg>
             <h3 className="font-bold text-gray-900 dark:text-white mb-1">{f.title}</h3>
