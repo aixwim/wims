@@ -51,6 +51,7 @@ export default function Header() {
     else root.classList.remove('dark');
     localStorage.setItem('theme', next ? 'dark' : 'light');
     document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', next ? 'dark' : 'light');
+    document.dispatchEvent(new CustomEvent('themechange', { detail: { dark: next } }));
   };
 
   return (

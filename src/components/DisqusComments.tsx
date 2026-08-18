@@ -40,9 +40,17 @@ export default function DisqusComments({ slug }: { slug: string }) {
       document.head.appendChild(s);
     };
 
+    const onThemeChange = () => {
+      const disqus = (window as { DISQUS?: { reset: (opts: { reload: boolean }) => void } }).DISQUS;
+      if (disqus) {
+        disqus.reset({ reload: true });
+      }
+    };
+    document.addEventListener('themechange', onThemeChange);
+
     if (typeof IntersectionObserver === 'undefined') {
       loadDisqus();
-      return;
+      return () => document.removeEventListener('themechange', onThemeChange);
     }
 
     const observer = new IntersectionObserver(
@@ -55,7 +63,10 @@ export default function DisqusComments({ slug }: { slug: string }) {
       { rootMargin: '600px' }
     );
     observer.observe(container);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('themechange', onThemeChange);
+    };
   }, [slug, pathname]);
 
   return (
