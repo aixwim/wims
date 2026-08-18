@@ -2,19 +2,25 @@ import Link from 'next/link';
 import { href } from '@/lib/url';
 import Logo from './Logo';
 import { getAllTags } from '@/lib/posts';
+import { getSiteConfig } from '@/lib/site';
+import { siteUrl } from '@/lib/site';
+import { getNetworkLinks, getAllRepos } from '@/lib/network';
 
 export default function Footer() {
+  const site = getSiteConfig();
   const tags = getAllTags().slice(0, 8);
+  const networkLinks = getNetworkLinks(site.repo);
+  const allRepos = getAllRepos();
 
   return (
     <footer className="border-t border-gray-100 dark:border-gray-800 mt-16 bg-gray-50/60 dark:bg-gray-950/60">
       <div className="mx-auto max-w-screen-lg px-5 py-12 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <Logo />
+            <Logo siteName={site.siteName} logoText={site.logoText} logoPrefix={site.logoPrefix ?? ''} />
             <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-              Blog pribadi tentang teknologi, pengembangan web, dan catatan harian untuk berbagi pengetahuan yang bermanfaat.
+              {site.description}
             </p>
             <div className="flex items-center gap-3">
               <a
@@ -84,11 +90,31 @@ export default function Footer() {
               ))}
             </ul>
           </nav>
+
+          {/* Network */}
+          <nav aria-label="Jaringan Wim">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white mb-4">Jaringan Wim</h3>
+            <ul className="space-y-2.5 text-sm">
+              {networkLinks.map((s) => (
+                <li key={s.repo}>
+                  <Link href={`${siteUrl}/${s.repo}/`} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
+                    <span>{s.name}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">({s.categoryLabel})</span>
+                  </Link>
+                </li>
+              ))}
+              {networkLinks.length === 0 && (
+                <li className="text-sm text-gray-500 dark:text-gray-400">Bagian dari jaringan situs Wim.</li>
+              )}
+            </ul>
+          </nav>
         </div>
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-gray-100 dark:border-gray-800 text-center sm:text-left">
-          <p className="text-sm text-gray-600 dark:text-gray-500">{new Date().getFullYear()} aixwim.dev</p>
+          <p className="text-sm text-gray-600 dark:text-gray-500">
+            {new Date().getFullYear()} {site.siteName} · Dikelola oleh aixwim · {allRepos.length} situs
+          </p>
         </div>
       </div>
     </footer>

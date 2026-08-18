@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { canonicalUrl, absoluteUrl } from '@/lib/url';
+import { canonicalUrl, absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Kontak',

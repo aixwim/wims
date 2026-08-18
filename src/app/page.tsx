@@ -1,15 +1,18 @@
 import Link from 'next/link';
 import { getAllPosts, formatDate, getAllTags, readingMin } from '@/lib/posts';
-import { href, canonicalUrl, absoluteUrl } from '@/lib/url';
+import { href } from '@/lib/url';
+import { canonicalUrl, absoluteUrl, getSiteConfig } from '@/lib/site';
 import type { Metadata } from 'next';
 
+const site = getSiteConfig();
+
 export const metadata: Metadata = {
-  title: 'aixwim — Blog',
-  description: 'Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.',
+  title: `${site.siteName} — ${site.tagline}`,
+  description: site.description,
   alternates: { canonical: canonicalUrl('/') },
   openGraph: {
     url: canonicalUrl('/'),
-    images: [{ url: absoluteUrl('/og.png'), width: 1200, height: 630, alt: 'aixwim — Blog Teknologi & Web Development' }],
+    images: [{ url: absoluteUrl('/og.png'), width: 1200, height: 630, alt: `${site.siteName} — ${site.tagline}` }],
   },
 };
 

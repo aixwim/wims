@@ -1,9 +1,11 @@
 import { getAllPosts } from '@/lib/posts';
-import { siteUrl } from '@/lib/url';
+import { siteUrl, basePath } from '@/lib/site';
+import { getSiteConfig } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
-const base = '/wims';
+const site = getSiteConfig();
+const base = basePath;
 
 export async function GET() {
   const posts = getAllPosts();
@@ -24,9 +26,9 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>aixwim</title>
+  <title>${site.siteName}</title>
   <link>${siteUrl}${base}/</link>
-  <description>Blog pribadi aixwim tentang teknologi, pengembangan web, dan catatan harian.</description>
+  <description>${site.description}</description>
   <language>id</language>
   <atom:link href="${siteUrl}${base}/rss.xml" rel="self" type="application/rss+xml"/>
   ${items}

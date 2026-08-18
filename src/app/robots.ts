@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { siteUrl, basePath } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
@@ -10,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://aixwim.github.io/wims/sitemap.xml',
+    sitemap: siteUrl + basePath + '/sitemap.xml',
   };
 }

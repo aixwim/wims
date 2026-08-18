@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllTags } from '@/lib/posts';
-import { href, canonicalUrl, absoluteUrl } from '@/lib/url';
+import { href } from '@/lib/url';
+import { canonicalUrl, absoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function TagsPage() {
     name: 'Semua Tag',
     url: absoluteUrl('/tags/'),
     numberOfItems: tags.length,
-    itemListElement: tags.map(({ tag, count }, i) => ({
+    itemListElement: tags.map(({ tag }, i) => ({
       '@type': 'ListItem',
       position: i + 1,
       name: `${tag}`,

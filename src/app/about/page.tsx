@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { canonicalUrl, absoluteUrl } from '@/lib/url';
+import { canonicalUrl, absoluteUrl } from '@/lib/site';
 import { href } from '@/lib/url';
 import { getAllPosts } from '@/lib/posts';
 

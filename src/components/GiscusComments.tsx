@@ -1,23 +1,28 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const GISCUS_BASE = 'https://giscus.app';
-const SITE_BASE = 'https://aixwim.github.io/wims';
 
-export default function GiscusComments() {
-  const scriptRef = useRef<HTMLScriptElement | null>(null);
-
+export default function GiscusComments({
+  repo,
+  theme,
+  repoId,
+  categoryId,
+}: {
+  repo: string;
+  theme: string;
+  repoId?: string;
+  categoryId?: string;
+}) {
   useEffect(() => {
-    const theme = `${SITE_BASE}/giscus-dark.css`;
-
     const script = document.createElement('script');
     script.src = `${GISCUS_BASE}/client.js`;
     script.async = true;
     script.crossOrigin = 'anonymous';
-    script.setAttribute('data-repo', 'aixwim/wims');
-    script.setAttribute('data-repo-id', 'R_kgDOT5wE7A');
+    script.setAttribute('data-repo', `aixwim/${repo}`);
+    if (repoId) script.setAttribute('data-repo-id', repoId);
     script.setAttribute('data-category', 'General');
-    script.setAttribute('data-category-id', 'DIC_kwDOT5wE7M4DDe8B');
+    if (categoryId) script.setAttribute('data-category-id', categoryId);
     script.setAttribute('data-mapping', 'pathname');
     script.setAttribute('data-strict', '0');
     script.setAttribute('data-reactions-enabled', '1');
@@ -26,13 +31,12 @@ export default function GiscusComments() {
     script.setAttribute('data-theme', theme);
     script.setAttribute('data-lang', 'id');
     script.setAttribute('data-loading', 'lazy');
-    scriptRef.current = script;
     document.head.appendChild(script);
 
     return () => {
       script.remove();
     };
-  }, []);
+  }, [repo, theme, repoId, categoryId]);
 
   return (
     <div className="mt-12 pt-8 border-t border-gray-800">

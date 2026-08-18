@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getPostsByTag, getAllTags, formatDate } from '@/lib/posts';
-import { href, canonicalUrl } from '@/lib/url';
+import { href } from '@/lib/url';
+import { canonicalUrl } from '@/lib/site';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
