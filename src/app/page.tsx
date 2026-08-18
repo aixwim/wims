@@ -154,7 +154,7 @@ export default function HomePage() {
                 prefetch={false}
                 className="badge bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
               >
-                #{tag}
+                {tag}
                 <span className="text-xs text-gray-600 dark:text-gray-500">{count}</span>
               </Link>
             ))}

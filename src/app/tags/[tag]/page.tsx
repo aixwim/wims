@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
   return {
-    title: `#${tag}`,
+    title: `${tag}`,
     description: `Artikel dengan tag ${tag}.`,
     alternates: { canonical: canonicalUrl(`/tags/${tag}/`) },
   };
@@ -29,7 +29,7 @@ export default async function TagPage({ params }: Props) {
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `Artikel dengan tag #${tag}`,
+    name: `Artikel dengan tag ${tag}`,
     url: canonicalUrl(`/tags/${tag}/`),
     numberOfItems: posts.length,
     itemListElement: posts.map((post, i) => ({
@@ -47,7 +47,7 @@ export default async function TagPage({ params }: Props) {
       <header className="mb-10">
         <span className="badge bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-300 mb-4">Tag</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
-          #{tag}
+          {tag}
         </h1>
         <p className="text-gray-600 dark:text-gray-400">{posts.length} artikel dengan tag ini.</p>
       </header>

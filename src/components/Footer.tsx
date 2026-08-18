@@ -77,7 +77,7 @@ export default function Footer() {
               {tags.map(({ tag, count }) => (
                 <li key={tag}>
                   <Link href={href(`/tags/${tag}/`)} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-300 transition-colors">
-                    <span>#{tag}</span>
+                    <span>{tag}</span>
                     <span className="text-xs text-gray-500 dark:text-gray-400">({count})</span>
                   </Link>
                 </li>

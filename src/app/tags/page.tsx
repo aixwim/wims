@@ -21,7 +21,7 @@ export default function TagsPage() {
     itemListElement: tags.map(({ tag, count }, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      name: `#${tag}`,
+      name: `${tag}`,
       url: absoluteUrl(`/tags/${tag}/`),
     })),
   };
@@ -62,7 +62,7 @@ export default function TagsPage() {
             >
               <span className="flex items-center gap-3">
                 <span className={`h-2.5 w-2.5 rounded-full bg-gradient-to-br ${gradients[i % 4].split(' ')[0]} group-hover:scale-125 transition-transform`} aria-hidden="true" />
-                <span className={`font-bold ${textColors[i % 4]}`}>#{tag}</span>
+                <span className={`font-bold ${textColors[i % 4]}`}>{tag}</span>
               </span>
               <span className="text-sm text-gray-600 dark:text-gray-500">{count} artikel</span>
             </Link>

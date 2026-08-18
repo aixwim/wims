@@ -172,7 +172,7 @@ export default async function PostPage({ params }: Props) {
                     prefetch={false}
                     className="text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1.5 hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300 transition-colors"
                   >
-                    #{tag}
+                    {tag}
                   </Link>
                 ))}
               </div>

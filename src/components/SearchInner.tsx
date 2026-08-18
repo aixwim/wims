@@ -64,7 +64,7 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
               <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-500 mb-1.5">
                 <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
                 {post.tags.slice(0, 3).map((tag) => (
-                  <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">#{tag}</span>
+                  <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">{tag}</span>
                 ))}
               </div>
               <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
