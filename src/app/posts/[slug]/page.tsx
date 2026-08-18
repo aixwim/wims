@@ -70,8 +70,11 @@ export default async function PostPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
-    description: post.excerpt,
+    description: post.metaDescription || post.excerpt,
     datePublished: post.date.toISOString(),
+    dateModified: post.date.toISOString(),
+    wordCount: post.body.split(/\s+/).filter(Boolean).length,
+    articleSection: post.category,
     author: {
       '@type': 'Person',
       name: 'aixwim',

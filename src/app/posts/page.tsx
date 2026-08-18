@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/posts';
-import { href, canonicalUrl } from '@/lib/url';
+import { href, canonicalUrl, absoluteUrl } from '@/lib/url';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,8 +14,24 @@ export default function PostsPage() {
   const tags = getAllTags().slice(0, 8);
   const years = [...new Set(posts.map((p) => p.date.getFullYear()))].sort((a, b) => b - a);
 
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Semua Artikel',
+    url: absoluteUrl('/posts/'),
+    numberOfItems: posts.length,
+    itemListElement: posts.slice(0, 20).map((post, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: post.title,
+      url: absoluteUrl(`/posts/${post.slug}/`),
+      datePublished: post.date.toISOString(),
+    })),
+  };
+
   return (
     <section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       {/* Header */}
       <header className="mb-10">
         <span className="badge bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 mb-4">Arsip</span>

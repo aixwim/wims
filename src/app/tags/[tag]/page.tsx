@@ -26,8 +26,24 @@ export default async function TagPage({ params }: Props) {
   const posts = getPostsByTag(tag);
   if (posts.length === 0) notFound();
 
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `Artikel dengan tag #${tag}`,
+    url: canonicalUrl(`/tags/${tag}/`),
+    numberOfItems: posts.length,
+    itemListElement: posts.map((post, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: post.title,
+      url: canonicalUrl(`/posts/${post.slug}/`),
+      datePublished: post.date.toISOString(),
+    })),
+  };
+
   return (
     <section className="max-w-screen-md">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <header className="mb-10">
         <span className="badge bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-300 mb-4">Tag</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">

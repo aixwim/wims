@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAllTags } from '@/lib/posts';
-import { href, canonicalUrl } from '@/lib/url';
+import { href, canonicalUrl, absoluteUrl } from '@/lib/url';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,8 +12,23 @@ export const metadata: Metadata = {
 export default function TagsPage() {
   const tags = getAllTags();
 
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Semua Tag',
+    url: absoluteUrl('/tags/'),
+    numberOfItems: tags.length,
+    itemListElement: tags.map(({ tag, count }, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `#${tag}`,
+      url: absoluteUrl(`/tags/${tag}/`),
+    })),
+  };
+
   return (
     <section className="max-w-screen-md">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <header className="mb-10">
         <span className="badge bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-300 mb-4">Topik</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
