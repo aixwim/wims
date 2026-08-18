@@ -7,10 +7,8 @@ import { href, siteUrl, basePath, absoluteUrl } from '@/lib/url';
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#020617' },
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-  ],
+  themeColor: '#020617',
+  colorScheme: 'dark',
 };
 
 export const metadata: Metadata = {
@@ -93,22 +91,11 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id" className="dark" suppressHydrationWarning>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function() {
-            var t = localStorage.getItem('theme');
-            var dark = t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            document.documentElement.classList.toggle('dark', dark);
-            var meta = document.createElement('meta');
-            meta.name = 'color-scheme';
-            meta.content = dark ? 'dark' : 'light';
-            document.head.appendChild(meta);
-          })();
-        `}} />
       </head>
-      <body className="min-h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-300 antialiased flex flex-col">
+      <body className="min-h-screen bg-gray-950 text-gray-300 antialiased flex flex-col">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] bg-indigo-600 text-white px-4 py-2 rounded-md">
           Lewati ke konten
         </a>

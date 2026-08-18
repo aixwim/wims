@@ -43,21 +43,10 @@ export default function Header() {
     setMobileOpen(false);
   }
 
-  const toggleTheme = () => {
-    const root = document.documentElement;
-    const isDark = root.classList.contains('dark');
-    const next = !isDark;
-    if (next) root.classList.add('dark');
-    else root.classList.remove('dark');
-    localStorage.setItem('theme', next ? 'dark' : 'light');
-    document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', next ? 'dark' : 'light');
-    document.dispatchEvent(new CustomEvent('themechange', { detail: { dark: next } }));
-  };
-
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 border-b transition-all duration-300 border-transparent bg-white/60 backdrop-blur-sm dark:bg-gray-950/60 is-scrolled:border-gray-200 is-scrolled:bg-white/85 is-scrolled:backdrop-blur-md dark:is-scrolled:border-gray-800 dark:is-scrolled:bg-gray-950/85"
+      className="sticky top-0 z-50 border-b transition-all duration-300 border-transparent bg-gray-950/60 backdrop-blur-sm is-scrolled:border-gray-800 is-scrolled:bg-gray-950/85 is-scrolled:backdrop-blur-md"
     >
       <div className="mx-auto max-w-screen-lg px-5 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
@@ -75,8 +64,8 @@ export default function Header() {
                   aria-current={active ? 'page' : undefined}
                   className={`rounded-lg px-3 py-2 transition-colors ${
                     active
-                      ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white'
+                      ? 'bg-indigo-900/30 text-indigo-300'
+                      : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
                   {link.label}
@@ -90,7 +79,7 @@ export default function Header() {
             <Link
               href={href('/search/')}
               prefetch={false}
-              className="hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white transition-colors"
+              className="hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-xl text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
               aria-label="Cari artikel"
               title="Search"
             >
@@ -99,23 +88,9 @@ export default function Header() {
               </svg>
             </Link>
 
-            <button
-              onClick={toggleTheme}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white transition-colors"
-              aria-label="Ubah tema terang/gelap"
-              title="Ubah tema"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="hidden dark:block h-5 w-5" aria-hidden="true">
-                <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="block dark:hidden h-5 w-5" aria-hidden="true">
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-              </svg>
-            </button>
-
             {/* Mobile hamburger */}
             <button
-              className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 transition-colors"
+              className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl text-gray-300 hover:bg-gray-800 transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
               aria-expanded={mobileOpen}
@@ -137,11 +112,11 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <nav id="mobile-nav" className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white/95 backdrop-blur-md dark:bg-gray-950/95">
+        <nav id="mobile-nav" className="md:hidden border-t border-gray-800 bg-gray-950/95 backdrop-blur-md">
           <div className="mx-auto max-w-screen-lg px-5 py-3 space-y-1">
             <Link
               href={href('/search/')}
-              className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+              className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-300 hover:bg-gray-800"
               onClick={() => setMobileOpen(false)}
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 text-gray-400" aria-hidden="true">
@@ -158,8 +133,8 @@ export default function Header() {
                   aria-current={active ? 'page' : undefined}
                   className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${
                     active
-                      ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300'
-                      : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
+                      ? 'bg-indigo-900/30 text-indigo-300'
+                      : 'text-gray-300 hover:bg-gray-800'
                   }`}
                   onClick={() => setMobileOpen(false)}
                 >

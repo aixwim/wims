@@ -8,8 +8,7 @@ export default function GiscusComments() {
   const scriptRef = useRef<HTMLScriptElement | null>(null);
 
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
-    const theme = isDark ? `${SITE_BASE}/giscus-dark.css` : `${SITE_BASE}/giscus-light.css`;
+    const theme = `${SITE_BASE}/giscus-dark.css`;
 
     const script = document.createElement('script');
     script.src = `${GISCUS_BASE}/client.js`;
@@ -30,30 +29,14 @@ export default function GiscusComments() {
     scriptRef.current = script;
     document.head.appendChild(script);
 
-    const sendTheme = () => {
-      const next = document.documentElement.classList.contains('dark') ? `${SITE_BASE}/giscus-dark.css` : `${SITE_BASE}/giscus-light.css`;
-      script.setAttribute('data-theme', next);
-      const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
-      if (iframe) {
-        iframe.contentWindow?.postMessage(
-          { giscus: { setConfig: { theme: next } } },
-          GISCUS_BASE
-        );
-      }
-    };
-
-    const onThemeChange = () => sendTheme();
-    document.addEventListener('themechange', onThemeChange);
-
     return () => {
-      document.removeEventListener('themechange', onThemeChange);
       script.remove();
     };
   }, []);
 
   return (
-    <div className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Komentar</h2>
+    <div className="mt-12 pt-8 border-t border-gray-800">
+      <h2 className="text-lg font-semibold text-white mb-6">Komentar</h2>
       <div className="giscus" />
     </div>
   );
