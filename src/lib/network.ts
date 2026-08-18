@@ -10,6 +10,7 @@ export interface NetworkSite {
   children: string[];
   related: string[];
   status: string;
+  articleCount?: number;
   note?: string;
 }
 

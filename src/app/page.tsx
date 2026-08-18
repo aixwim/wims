@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getAllPosts, formatDate, getAllTags, readingMin } from '@/lib/posts';
 import { href } from '@/lib/url';
-import { getNetwork } from '@/lib/network';
+import { getNetwork, type NetworkSite } from '@/lib/network';
 import { canonicalUrl, absoluteUrl, getSiteConfig, siteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 
@@ -73,12 +73,14 @@ function CategoryCard({
   category,
   note,
   palette,
+  articleCount,
 }: {
   repo: string;
   name: string;
   category: string;
   note?: string;
   palette?: { accent: string; accent2: string };
+  articleCount?: number;
 }) {
   const accent = palette?.accent || site.brand.accent;
   const accent2 = palette?.accent2 || site.brand.accent2;
@@ -114,9 +116,90 @@ function CategoryCard({
       <p className="mt-1.5 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
         {note || `Situs kategori ${category} dalam jaringan Wim.`}
       </p>
+      <div className="mt-4 flex items-center gap-3 text-xs text-gray-600 dark:text-gray-400">
+        <span className="inline-flex items-center gap-1.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5" aria-hidden="true">
+            <path d="M21 12c-4.4 0-8.9 2.7-9 8 0-5.3-4.5-8-9-8 4.5 0 9-2.7 9-8 .1 5.3 4.6 8 9 8z" />
+          </svg>
+          {articleCount ?? 0} artikel
+        </span>
+        <span className="text-gray-300 dark:text-gray-600">&middot;</span>
+        <span>{category}</span>
+      </div>
     </Link>
   );
 }
+
+function TopicCard({ topic }: { topic: NetworkSite }) {
+  const palette = network.brandPalettes?.[topic.category] || network.brandPalettes?.[topic.parent || ''];
+  const accent = palette?.accent || site.brand.accent;
+  const accent2 = palette?.accent2 || site.brand.accent2;
+  return (
+    <Link
+      href={`${siteUrl}/${topic.repo}/`}
+      prefetch={false}
+      className="group card card-hover p-6 relative overflow-hidden flex flex-col justify-between"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <span
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-xs font-extrabold text-white"
+          style={{
+            backgroundImage: `linear-gradient(135deg, ${accent}, ${accent2})`,
+            boxShadow: `0 4px 14px ${accent}40`,
+          }}
+          aria-hidden="true"
+        >
+          {topic.name.replace(/^Wim\s*/, '').slice(0, 2).toUpperCase()}
+        </span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 text-gray-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand" aria-hidden="true">
+          <path d="M7 17L17 7M8 7h9v9" />
+        </svg>
+      </div>
+      <div>
+        <h3 className="font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-brand transition-colors">
+          {topic.name}
+        </h3>
+        <p className="mt-1.5 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+          {topic.note || `Topik spesifik dalam kategori ${topic.categoryLabel}.`}
+        </p>
+        <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
+          {topic.articleCount ?? 0} artikel &middot; {topic.categoryLabel}
+        </p>
+      </div>
+    </Link>
+  );
+}
+
+const featureItems = [
+  {
+    title: 'Konten Orisinal',
+    desc: 'Setiap artikel ditulis khusus untuk satu niche, bukan hasil curian konten — original dan bernilai.',
+    icon: (
+      <path d="M12 3l7 4v5c0 4.4-3 8.5-7 9-4-.5-7-4.6-7-9V7l7-4zM9 12l2 2 4-4" />
+    ),
+  },
+  {
+    title: 'SEO-First',
+    desc: 'Struktur, metadata, JSON-LD, sitemap, dan performa dioptimalkan untuk indeksasi yang baik.',
+    icon: (
+      <path d="M12 2l8 3v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5l8-3zm-1 15l6-6-1.4-1.4-4.6 4.6-2.3-2.3L7.3 13 11 16.7z" />
+    ),
+  },
+  {
+    title: 'Terstruktur',
+    desc: 'Jaringan berlapis: hub, kategori, dan topik spesifik — navigasi dan koneksi antar-situs rapi.',
+    icon: (
+      <path d="M4 5h6v6H4V5zm10 0h6v6h-6V5zM4 13h6v6H4v-6zm10 0h6v6h-6v-6zM7 11v2m10-2v2M10 14h4" />
+    ),
+  },
+  {
+    title: 'Terus Bertumbuh',
+    desc: 'Artikel baru dirilis rutin di seluruh kategori dan topik, mencakup sudut pandang beragam.',
+    icon: (
+      <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />
+    ),
+  },
+];
 
 export default function HomePage() {
   const posts = getAllPosts();
@@ -131,8 +214,156 @@ export default function HomePage() {
   const categories = (me?.children || [])
     .map((repo) => allSites.find((s) => s.repo === repo))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
-  const topicsCount = network.topics.length;
+  const topics = network.topics;
+  const totalArticles = allSites.reduce((acc, s) => acc + (s.articleCount ?? 0), 0);
+  const totalSites = allSites.length;
+  const topicsCount = topics.length;
+  const stats = [
+    { value: `${totalSites}`, label: 'Situs Niche' },
+    { value: `${totalArticles}+`, label: 'Artikel Orisinal' },
+    { value: `${categories.length}`, label: 'Kategori' },
+    { value: `${topicsCount}`, label: 'Topik Spesifik' },
+  ];
 
+  /* ============ LANDING PAGE (hub / portal) ============ */
+  if (isPortal) {
+    return (
+      <div>
+        {/* HERO */}
+        <section className="relative overflow-hidden py-16 md:py-24 mb-16">
+          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+            <div className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-brand/15 blur-3xl" />
+            <div className="absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-brand2/15 blur-3xl" />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 h-[28rem] w-[28rem] rounded-full bg-brand2/10 blur-3xl" />
+          </div>
+          <div className="relative mx-auto max-w-4xl text-center">
+            <span className="badge bg-brand/15 text-brand mb-7">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+              Jaringan {categories.length} situs niche berbahasa Indonesia
+            </span>
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-[1.1] mb-6">
+              {site.siteName} —{' '}
+              <span className="text-gradient">{site.tagline}</span>
+            </h1>
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto mb-9">
+              {site.description}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a href="#kategori" className="btn btn-primary">
+                Jelajahi Kategori
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6" />
+                </svg>
+              </a>
+              <Link href={href('/about/')} prefetch={false} className="btn btn-secondary">
+                Tentang Jaringan
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* STATS BAR */}
+        <section className="mb-16" aria-label="Statistik jaringan">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label} className="card p-6 text-center">
+                <p className="text-3xl md:text-4xl font-extrabold text-gradient tracking-tight">{s.value}</p>
+                <p className="mt-1.5 text-sm text-gray-600 dark:text-gray-400">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* KATEGORI */}
+        <section id="kategori" className="mb-16 scroll-mt-24">
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Jelajahi Kategori</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Setiap kategori adalah situs dengan fokus dan audiensnya sendiri.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {categories.map((s) => (
+              <CategoryCard
+                key={s.repo}
+                repo={s.repo}
+                name={s.name}
+                category={s.category}
+                note={s.note}
+                palette={network.brandPalettes?.[s.category]}
+                articleCount={s.articleCount}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* TOPIK SPESIFIK */}
+        {topicsCount > 0 && (
+          <section className="mb-16">
+            <div className="flex items-end justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Topik Spesifik</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  Pendalaman fokus di bawah kategori utama, dari AI hingga sepak bola.
+                </p>
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {topics.map((t) => (
+                <TopicCard key={t.repo} topic={t} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* MENGAPA WIM */}
+        <section className="mb-16">
+          <div className="max-w-2xl mb-8">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Mengapa Membaca di Jaringan Wim?
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Satu ekosistem konten yang dibangun dengan standar kualitas konsisten.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {featureItems.map((f) => (
+              <div key={f.title} className="card card-hover p-6">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/15 text-brand" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+                    {f.icon}
+                  </svg>
+                </span>
+                <h3 className="mt-4 font-bold tracking-tight text-gray-900 dark:text-white">{f.title}</h3>
+                <p className="mt-1.5 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="card p-8 md:p-12 text-center relative overflow-hidden mb-4">
+          <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-brand2/10 to-brand2/10 pointer-events-none" aria-hidden="true" />
+          <div className="relative">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
+              Mulai jelajahi jaringan Wim sekarang
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-7">
+              Pilih kategori yang paling dekat dengan minatmu dan temukan konten yang relevan, mendalam, dan mudah dipahami.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a href="#kategori" className="btn btn-primary">Lihat Semua Kategori</a>
+              <Link href={href('/posts/')} prefetch={false} className="btn btn-secondary">Artikel Terbaru</Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  /* ============ BLOG (site kategori / topik) ============ */
   return (
     <div>
       {/* Hero */}
@@ -145,88 +376,43 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-3xl text-center">
           <span className="badge bg-brand/15 text-brand mb-6">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-            {isPortal ? `Jaringan ${categories.length} situs niche` : `Blog ${site.categoryLabel}`}
+            Blog {site.categoryLabel}
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight mb-5">
-            {isPortal ? (
-              <>
-                {site.siteName} — <span className="text-gradient">{site.tagline}</span>
-              </>
-            ) : (
-              <span className="text-gradient">{site.tagline}</span>
-            )}
+            <span className="text-gradient">{site.tagline}</span>
           </h1>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
             {site.description}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link href={href('/posts/')} prefetch={false} className="btn btn-primary">
-              {isPortal ? 'Artikel Terbaru' : 'Jelajahi Artikel'}
+              Jelajahi Artikel
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </Link>
             <Link href={href('/about/')} prefetch={false} className="btn btn-secondary">
-              {isPortal ? 'Tentang Jaringan' : 'Tentang Saya'}
+              Tentang Saya
             </Link>
           </div>
-          {!isPortal && (
-            <div className="mt-10 flex items-center justify-center gap-8 text-center">
-              <div>
-                <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{posts.length}+</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Artikel</p>
-              </div>
-              <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
-              <div>
-                <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{tags.length}+</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Topik</p>
-              </div>
-              <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
-              <div>
-                <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{Math.ceil(totalReadMins / 60)}</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Jam Membaca</p>
-              </div>
+          <div className="mt-10 flex items-center justify-center gap-8 text-center">
+            <div>
+              <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{posts.length}+</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Artikel</p>
             </div>
-          )}
+            <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
+            <div>
+              <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{tags.length}+</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Topik</p>
+            </div>
+            <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
+            <div>
+              <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{Math.ceil(totalReadMins / 60)}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Jam Membaca</p>
+            </div>
+          </div>
         </div>
       </section>
-
-      {/* Grid kategori (hanya untuk portal/hub) */}
-      {isPortal && (
-        <section className="mb-12">
-          <div className="flex items-end justify-between mb-6">
-            <div>
-              <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Jelajahi Kategori</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Pilih situs niche, setiap kategori punya topik dan konten khusus.</p>
-            </div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {categories.map((s) => (
-              <CategoryCard
-                key={s.repo}
-                repo={s.repo}
-                name={s.name}
-                category={s.category}
-                note={s.note}
-                palette={network.brandPalettes?.[s.category]}
-              />
-            ))}
-            {topicsCount > 0 && (
-              <div className="card p-6 flex flex-col justify-between bg-gradient-to-br from-brand/10 via-brand2/10 to-brand2/10 relative overflow-hidden">
-                <div>
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-sm font-extrabold bg-brand/15 text-brand" aria-hidden="true">
-                    +{topicsCount}
-                  </span>
-                  <h3 className="mt-4 font-bold tracking-tight text-gray-900 dark:text-white">Topik Spesifik</h3>
-                  <p className="mt-1.5 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                    Situs topik di bawah kategori, misalnya AI, pemrograman, game mobile, dan sepak bola.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
 
       {/* Featured posts */}
       {featured.length > 0 && (
