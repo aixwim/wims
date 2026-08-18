@@ -5,6 +5,8 @@
   "logoPrefix": "aix",
   "tagline": "Portal Jaringan Wim",
   "description": "Portal jaringan situs Wim: teknologi, game, bisnis, dan banyak lagi.",
+  "ogTitle": "Belajar Teknologi<br>dan <span class=\"grad\">Web Development</span>",
+  "ogSubtitle": "Artikel bermanfaat tentang pengembangan web, SEO, dan teknologi — ditulis untuk dipahami semua orang.",
   "category": "hub",
   "categoryLabel": "Hub",
   "parent": null,

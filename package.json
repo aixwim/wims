@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && touch out/.nojekyll",
     "start": "next start",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "assets": "node scripts/generate-assets.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
