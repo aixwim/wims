@@ -9,13 +9,25 @@
   "ogSubtitle": "Jelajahi 10 kategori niche — teknologi, game, bisnis, dan lainnya — masing-masing dengan konten orisinal, mendalam, dan ramah SEO.",
   "category": "hub",
   "categoryLabel": "Hub",
-  "parent": null,
   "children": [
-    "wims-bisnis", "wims-selebritas", "wims-kultur",
-    "wims-entertainment", "wims-game", "wims-living",
-    "wims-berita", "wims-style", "wims-teknologi", "wims-olahraga"
+    "wims-bisnis",
+    "wims-selebritas",
+    "wims-kultur",
+    "wims-entertainment",
+    "wims-game",
+    "wims-living",
+    "wims-berita",
+    "wims-style",
+    "wims-teknologi",
+    "wims-olahraga"
   ],
-  "related": [],
-  "brand": { "accent": "#6366f1", "accent2": "#8b5cf6" },
-  "giscus": { "repoId": "R_kgDOT5wE7A", "categoryId": "DIC_kwDOT5wE7M4DDe8B" }
+  "brand": {
+    "accent": "#6366f1",
+    "accent2": "#8b5cf6"
+  },
+  "giscus": {
+    "repoId": "R_kgDOT5wE7A",
+    "categoryId": "DIC_kwDOT5wE7M4DDe8B"
+  },
+  "googleVerification": "dx63Ebn63PlvT6120AIhc7cyImZlvvYthTYPurZA_C8"
 }
