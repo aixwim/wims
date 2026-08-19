@@ -3,6 +3,8 @@ title: "Perbedaan Blog dan Website"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Memahami perbedaan mendasar antara blog dan website, mulai dari tujuan, struktur konten, hingga cara keduanya menarik pengunjung."
+meta_title: "Perbedaan Blog dan Website"
+meta_description: "Ketahui perbedaan mendasar blog dan website dari tujuan, struktur konten, hingga cara keduanya menarik pengunjung agar Anda memilih format yang tepat."
 tags: ["blog", "website", "literasi", "tips"]
 ---
 

@@ -3,6 +3,8 @@ title: "Menulis Catatan dari Artikel yang Dibaca"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Cara efektif menulis catatan dari artikel yang dibaca agar informasi lebih mudah diingat dan benar-benar bermanfaat bagi kehidupan Anda."
+meta_title: "Menulis Catatan dari Artikel yang Dibaca"
+meta_description: "Tulis catatan dari artikel yang dibaca agar informasi lebih mudah diingat, dengan teknik sederhana yang membuat setiap bacaan meninggalkan manfaat nyata."
 tags: ["membaca", "catatan", "literasi", "tips"]
 ---
 

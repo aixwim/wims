@@ -3,6 +3,8 @@ title: "Panduan Menjelajahi Konten Wim"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Pelajari cara terbaik menjelajahi konten Wim agar Anda tidak tersesat dan selalu menemukan artikel yang relevan dengan kebutuhan."
+meta_title: "Panduan Menjelajahi Konten Wim"
+meta_description: "Pelajari cara menjelajahi konten Wim lewat kategori, tag, dan tautan antar artikel agar Anda selalu menemukan bacaan yang relevan dan tidak tersesat."
 tags: ["panduan", "wim", "membaca", "jaringan"]
 ---
 

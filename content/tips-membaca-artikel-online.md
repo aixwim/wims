@@ -3,6 +3,8 @@ title: "Tips Membaca Artikel Online"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Kumpulan tips praktis agar membaca artikel online lebih fokus, efisien, dan tidak mudah teralihkan oleh berbagai distraksi digital."
+meta_title: "Tips Membaca Artikel Online"
+meta_description: "Terapkan tips membaca artikel online agar lebih fokus dan efisien, dari menyingkirkan distraksi hingga strategi memindai yang menghemat waktu."
 tags: ["membaca", "tips", "literasi", "fokus"]
 ---
 

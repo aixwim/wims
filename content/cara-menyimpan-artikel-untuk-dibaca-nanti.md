@@ -3,6 +3,8 @@ title: "Cara Menyimpan Artikel untuk Dibaca Nanti"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Panduan menyimpan artikel untuk dibaca nanti menggunakan bookmark, aplikasi baca nanti, dan metode lain agar tidak hilang."
+meta_title: "Cara Menyimpan Artikel untuk Dibaca Nanti"
+meta_description: "Simpan artikel untuk dibaca nanti dengan mudah lewat bookmark browser, aplikasi baca nanti, dan mode offline agar daftar bacaan Anda tetap terkelola."
 tags: ["membaca", "tips", "produktivitas", "literasi"]
 ---
 

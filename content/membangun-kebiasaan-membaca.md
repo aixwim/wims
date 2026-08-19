@@ -3,6 +3,8 @@ title: "Membangun Kebiasaan Membaca"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Langkah-langkah sederhana untuk membangun kebiasaan membaca yang konsisten, mulai dari menetapkan target kecil hingga menjaga rutinitas."
+meta_title: "Membangun Kebiasaan Membaca"
+meta_description: "Bangun kebiasaan membaca yang konsisten mulai dari target kecil, jadikan bagian rutinitas harian, dan jaga semangat dengan cara yang menyenangkan."
 tags: ["membaca", "kebiasaan", "literasi", "tips"]
 ---
 

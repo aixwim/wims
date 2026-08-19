@@ -3,6 +3,8 @@ title: "Mengenal Jaringan Wim"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Jaringan Wim adalah wadah berbagi konten Indonesia yang menghubungkan penulis, pembaca, dan ide dalam satu ekosistem literasi digital."
+meta_title: "Mengenal Jaringan Wim"
+meta_description: "Jaringan Wim adalah wadah berbagi konten Indonesia yang mempertemukan penulis dan pembaca dalam satu ekosistem literasi digital yang saling terhubung."
 tags: ["jaringan", "wim", "literasi", "blog"]
 ---
 

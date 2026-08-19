@@ -3,6 +3,8 @@ title: "Sejarah Blog dan Perkembangannya"
 date: "2026-08-19"
 category: "Hub"
 excerpt: "Menelusuri perjalanan blog dari catatan daring sederhana di era 1990-an hingga menjadi media yang kita kenal dan gunakan saat ini."
+meta_title: "Sejarah Blog dan Perkembangannya"
+meta_description: "Telusuri sejarah blog dari catatan daring sederhana era 1990-an hingga media berpengaruh saat ini, serta alasan blog tetap relevan di tengah media sosial."
 tags: ["blog", "sejarah", "literasi", "jaringan"]
 ---
 
