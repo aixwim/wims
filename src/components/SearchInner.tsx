@@ -1,29 +1,24 @@
 'use client';
-import { useDeferredValue, useMemo, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { href } from '@/lib/url';
 import { formatDate } from '@/lib/format';
 import type { Post } from '@/lib/posts';
 
-type SearchItem = Pick<Post, 'slug' | 'title' | 'excerpt' | 'tags'> & { date: string };
+type SearchItem = Pick<Post, 'slug' | 'title' | 'excerpt' | 'tags' | 'date'>;
 
 export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[] }) {
   const [q, setQ] = useState('');
 
-  const deferredQuery = useDeferredValue(q);
-  const query = deferredQuery.toLowerCase().trim();
-  const results = useMemo(
-    () =>
-      query
-        ? searchIndex.filter(
-            (p) =>
-              p.title.toLowerCase().includes(query) ||
-              p.excerpt.toLowerCase().includes(query) ||
-              p.tags.some((t) => t.toLowerCase().includes(query))
-          )
-        : [],
-    [query, searchIndex]
-  );
+  const query = q.toLowerCase().trim();
+  const results = query
+    ? searchIndex.filter(
+        (p) =>
+          p.title.toLowerCase().includes(query) ||
+          p.excerpt.toLowerCase().includes(query) ||
+          p.tags.some((t) => t.includes(query))
+      )
+    : [];
 
   return (
     <div>
@@ -67,7 +62,7 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
               className="group block rounded-xl px-4 py-3 border border-gray-100 dark:border-gray-800 hover:border-brand/50 dark:hover:border-brand/50 hover:shadow-md hover:-translate-y-0.5 transition-all"
             >
               <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-500 mb-1.5">
-                <time dateTime={post.date}>{formatDate(post.date)}</time>
+                <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
                 {post.tags.slice(0, 3).map((tag) => (
                   <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">{tag}</span>
                 ))}

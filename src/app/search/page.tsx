@@ -18,7 +18,7 @@ export default function SearchPage() {
     title: p.title,
     excerpt: p.excerpt,
     tags: p.tags,
-    date: p.date.toISOString(),
+    date: p.date,
   }));
 
   return (
