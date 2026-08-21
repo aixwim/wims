@@ -1,25 +1,6 @@
-'use client';
-import { useState } from 'react';
+import CopyLinkButton from './CopyLinkButton';
 
 export default function ShareButtons({ title, url }: { title: string; url: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(url);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = url;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 
@@ -68,23 +49,7 @@ className="p-2 text-gray-400 hover:text-brand hover:bg-gray-100 dark:hover:bg-gr
           {link.icon}
         </a>
       ))}
-      <button
-        onClick={copyToClipboard}
-        className="p-2 text-gray-400 hover:text-brand hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
-        aria-label={copied ? 'Link disalin' : 'Copy link'}
-        title={copied ? 'Link disalin!' : 'Copy link'}
-      >
-        {copied ? (
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-            <path d="M20 6L9 17l-5-5" />
-          </svg>
-        ) : (
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-          </svg>
-        )}
-      </button>
-      {copied && <span className="text-xs text-green-600 dark:text-green-400">Copied!</span>}
+      <CopyLinkButton url={url} />
     </div>
   );
 }

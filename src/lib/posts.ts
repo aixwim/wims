@@ -20,6 +20,10 @@ export interface Post {
 const contentDir = path.join(process.cwd(), 'content');
 
 let _cache: Post[] | null = null;
+let _postsBySlug: Map<string, Post> | null = null;
+let _postsByTag: Map<string, Post[]> | null = null;
+let _tags: { tag: string; count: number }[] | null = null;
+let _postIndexes: Map<string, number> | null = null;
 
 function readAllPosts(): Post[] {
   if (_cache) return _cache;
@@ -44,6 +48,20 @@ function readAllPosts(): Post[] {
   _cache = posts
     .filter((p) => !p.draft)
     .sort((a, b) => b.date.getTime() - a.date.getTime());
+  _postsBySlug = new Map(_cache.map((post) => [post.slug, post]));
+  _postIndexes = new Map(_cache.map((post, index) => [post.slug, index]));
+
+  _postsByTag = new Map();
+  for (const post of _cache) {
+    for (const tag of post.tags) {
+      const taggedPosts = _postsByTag.get(tag) ?? [];
+      taggedPosts.push(post);
+      _postsByTag.set(tag, taggedPosts);
+    }
+  }
+  _tags = [..._postsByTag.entries()]
+    .map(([tag, taggedPosts]) => ({ tag, count: taggedPosts.length }))
+    .sort((a, b) => b.count - a.count);
   return _cache;
 }
 
@@ -52,30 +70,24 @@ export function getAllPosts(): Post[] {
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
-  return readAllPosts().find((p) => p.slug === slug);
+  readAllPosts();
+  return _postsBySlug?.get(slug);
 }
 
 export function getAllTags(): { tag: string; count: number }[] {
-  const posts = getAllPosts();
-  const counts = new Map<string, number>();
-  for (const post of posts) {
-    for (const tag of post.tags) {
-      counts.set(tag, (counts.get(tag) ?? 0) + 1);
-    }
-  }
-  return [...counts.entries()]
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count);
+  readAllPosts();
+  return _tags ?? [];
 }
 
 export function getPostsByTag(tag: string): Post[] {
-  return getAllPosts().filter((p) => p.tags.includes(tag));
+  readAllPosts();
+  return _postsByTag?.get(tag) ?? [];
 }
 
 export function getAdjacentPosts(slug: string): { prev?: Post; next?: Post } {
   const posts = getAllPosts();
-  const idx = posts.findIndex((p) => p.slug === slug);
-  if (idx === -1) return {};
+  const idx = _postIndexes?.get(slug);
+  if (idx === undefined) return {};
   return {
     prev: idx > 0 ? posts[idx - 1] : undefined,
     next: idx >= 0 && idx < posts.length - 1 ? posts[idx + 1] : undefined,
