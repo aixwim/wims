@@ -1,0 +1,39 @@
+1:"$Sreact.fragment"
+2:I[22016,["/wims/_next/static/chunks/1mpnoxox0-4cg.js"],""]
+3:I[97367,["/wims/_next/static/chunks/1mpnoxox0-4cg.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/wims/_next/static/chunks/1mpnoxox0-4cg.js"],"ViewportBoundary"]
+9:I[97367,["/wims/_next/static/chunks/1mpnoxox0-4cg.js"],"MetadataBoundary"]
+7:X
+1c:X
+1c:C
+0:{"buildId":"AOcdZtb28edVDp8AhWhTO","data":[{"rsc":["$","$1","c",{"children":[["$","section",null,{"className":"max-w-screen-md","children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"ItemList\",\"name\":\"Artikel dengan tag perkenalan\",\"url\":\"https://aixwim.github.io/wims/tags/perkenalan/\",\"numberOfItems\":1,\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Selamat Datang di Blog Saya\",\"url\":\"https://aixwim.github.io/wims/posts/welcome/\",\"datePublished\":\"2026-08-16T00:00:00.000Z\"}]}"}}],["$","header",null,{"className":"mb-10","children":[["$","span",null,{"className":"badge bg-brand/15 text-brand mb-4","children":"Tag"}],["$","h1",null,{"className":"text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3","children":"perkenalan"}],["$","p",null,{"className":"text-gray-600 dark:text-gray-400","children":[1," artikel dengan tag ini."]}]]}],["$","div",null,{"className":"space-y-2","children":[["$","$L2","welcome",{"href":"/posts/welcome/","prefetch":false,"className":"group flex items-baseline gap-4 rounded-xl px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900 ","children":[["$","time",null,{"className":"text-xs text-gray-600 dark:text-gray-500 tabular-nums shrink-0 w-20 hidden sm:block","dateTime":"2026-08-16T00:00:00.000Z","children":"16 Agustus 2026"}],["$","span",null,{"className":"text-[15px] font-semibold text-gray-800 dark:text-gray-200 group-hover:text-brand transition-colors leading-snug","children":"Selamat Datang di Blog Saya"}],["$","svg",null,{"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"2","className":"h-4 w-4 ml-auto text-gray-300 dark:text-gray-600 group-hover:text-brand group-hover:translate-x-0.5 transition-all shrink-0","aria-hidden":"true","children":["$","path",null,{"d":"M5 12h14M13 6l6 6-6 6"}]}]]}]]}],["$","div",null,{"className":"mt-10","children":["$","$L2",null,{"href":"/tags/","prefetch":false,"className":"inline-flex items-center gap-2 text-sm font-semibold text-brand hover:underline underline-offset-4","children":[["$","svg",null,{"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"2","className":"h-4 w-4","aria-hidden":"true","children":["$","path",null,{"d":"M19 12H5M11 18l-6-6 6-6"}]}],"Semua tag"]}]}]]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#6366f1"}],["$","meta","3",{"name":"color-scheme","content":"dark"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Perkenalan | Wim"}],["$","meta","1",{"name":"description","content":"Kumpulan artikel bertema perkenalan — baca panduan, tips, dan wawasan terbaik seputar perkenalan untuk pembaca Indonesia."}],["$","link","2",{"rel":"author","href":"https://aixwim.github.io/wims/about/"}],["$","meta","3",{"name":"author","content":"aixwim"}],["$","link","4",{"rel":"manifest","href":"/wims/manifest.webmanifest"}],["$","meta","5",{"name":"keywords","content":"hub,jaringan konten indonesia,portal blog indonesia,kumpulan blog,blog bahasa indonesia,konten digital,blog,aixwim,wim"}],["$","meta","6",{"name":"creator","content":"aixwim"}],["$","meta","7",{"name":"publisher","content":"aixwim"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","link","10",{"rel":"canonical","href":"https://aixwim.github.io/wims/tags/perkenalan/"}],["$","meta","11",{"name":"format-detection","content":"telephone=no"}],["$","meta","12",{"name":"google-site-verification","content":"dx63Ebn63PlvT6120AIhc7cyImZlvvYthTYPurZA_C8"}],["$","meta","13",{"property":"og:title","content":"Wim — Jaringan Konten Indonesia"}],["$","meta","14",{"property":"og:description","content":"Jaringan publikasi digital Wim: 10 situs niche berbahasa Indonesia yang fokus pada teknologi, game, bisnis, gaya hidup, dan banyak lagi — dikurasi dalam satu portal."}],"$La","$Lb","$Lc","$Ld","$Le","$Lf","$L10","$L11","$L12","$L13","$L14","$L15","$L16","$L17","$L18"]}]}]}],null]}],"isPartial":"$@19","staleTime":"$7","varyParams":null},{"rsc":"$L1a","isPartial":"$@1b","staleTime":"$7","varyParams":"$1c"},{"rsc":"$L1d","isPartial":"$@1e","staleTime":"$7","varyParams":"$1c"}],"isUpgradeableISRFallback":false,"a":"$@1f","rootVaryParams":null,"needsRuntimeRequest":"$@20"}
+21:I[27201,["/wims/_next/static/chunks/1mpnoxox0-4cg.js"],"IconMark"]
+22:I[39756,["/wims/_next/static/chunks/1mpnoxox0-4cg.js"],"default"]
+23:I[37457,["/wims/_next/static/chunks/1mpnoxox0-4cg.js"],"default"]
+5:null
+a:["$","meta","15",{"property":"og:url","content":"https://aixwim.github.io/wims/"}]
+b:["$","meta","16",{"property":"og:site_name","content":"Wim"}]
+c:["$","meta","17",{"property":"og:locale","content":"id_ID"}]
+d:["$","meta","18",{"property":"og:image","content":"https://aixwim.github.io/wims/og.png"}]
+e:["$","meta","19",{"property":"og:image:width","content":"1200"}]
+f:["$","meta","20",{"property":"og:image:height","content":"630"}]
+10:["$","meta","21",{"property":"og:image:alt","content":"Wim — Jaringan Konten Indonesia"}]
+11:["$","meta","22",{"property":"og:type","content":"website"}]
+12:["$","meta","23",{"name":"twitter:card","content":"summary_large_image"}]
+13:["$","meta","24",{"name":"twitter:title","content":"Wim — Jaringan Konten Indonesia"}]
+14:["$","meta","25",{"name":"twitter:description","content":"Jaringan publikasi digital Wim: 10 situs niche berbahasa Indonesia yang fokus pada teknologi, game, bisnis, gaya hidup, dan banyak lagi — dikurasi dalam satu portal."}]
+15:["$","meta","26",{"name":"twitter:image","content":"https://aixwim.github.io/wims/og.png"}]
+16:["$","link","27",{"rel":"icon","href":"/wims/favicon.svg","type":"image/svg+xml"}]
+17:["$","link","28",{"rel":"apple-touch-icon","href":"/wims/favicon.svg","sizes":"180x180"}]
+18:["$","$L21","29",{}]
+1a:["$","$1","c",{"children":[null,["$","$L22",null,{"parallelRouterKey":"children","template":["$","$L23",null,{}]}]]}]
+1d:["$","$1","c",{"children":[null,["$","$L22",null,{"parallelRouterKey":"children","template":["$","$L23",null,{}]}]]}]
+20:true
+7:300
+7:C
+1f:0
+19:"$undefined"
+1b:"$undefined"
+1e:"$undefined"
+6:"$undefined"
