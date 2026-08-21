@@ -136,9 +136,6 @@ export default async function PostPage({ params }: Props) {
   return (
     <>
       <ReadingProgress />
-      <link rel="preconnect" href="https://giscus.app" crossOrigin="anonymous" />
-      <link rel="dns-prefetch" href="https://giscus.app" />
-      <link rel="dns-prefetch" href="https://github.com" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
@@ -217,6 +214,8 @@ export default async function PostPage({ params }: Props) {
               alt={post.title}
               width={1200}
               height={675}
+              decoding="async"
+              fetchPriority="high"
               className="aspect-[16/9] w-full object-cover rounded-2xl mb-10"
             />
           ) : (

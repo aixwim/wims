@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useDeferredValue, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { href } from '@/lib/url';
 import { formatDate } from '@/lib/format';
@@ -10,15 +10,20 @@ type SearchItem = Pick<Post, 'slug' | 'title' | 'excerpt' | 'tags' | 'date'>;
 export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[] }) {
   const [q, setQ] = useState('');
 
-  const query = q.toLowerCase().trim();
-  const results = query
-    ? searchIndex.filter(
-        (p) =>
-          p.title.toLowerCase().includes(query) ||
-          p.excerpt.toLowerCase().includes(query) ||
-          p.tags.some((t) => t.includes(query))
-      )
-    : [];
+  const deferredQuery = useDeferredValue(q);
+  const query = deferredQuery.toLowerCase().trim();
+  const results = useMemo(
+    () =>
+      query
+        ? searchIndex.filter(
+            (p) =>
+              p.title.toLowerCase().includes(query) ||
+              p.excerpt.toLowerCase().includes(query) ||
+              p.tags.some((t) => t.toLowerCase().includes(query))
+          )
+        : [],
+    [query, searchIndex]
+  );
 
   return (
     <div>

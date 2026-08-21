@@ -52,7 +52,7 @@ export default function GiscusComments({
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) loadIfVisible();
       },
-      { rootMargin: '1200px 0px' }
+      { rootMargin: '400px 0px' }
     );
     observer.observe(container);
 
