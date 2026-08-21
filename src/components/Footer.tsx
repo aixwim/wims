@@ -13,7 +13,7 @@ export default function Footer() {
   const allRepos = getAllRepos();
 
   return (
-    <footer className="border-t border-gray-100 dark:border-gray-800 mt-16 bg-gray-50/60 dark:bg-gray-950/60">
+    <footer className="deferred-render border-t border-gray-100 dark:border-gray-800 mt-16 bg-gray-50/60 dark:bg-gray-950/60">
       <div className="mx-auto max-w-screen-lg px-5 py-12 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}

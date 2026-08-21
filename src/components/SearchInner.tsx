@@ -5,7 +5,7 @@ import { href } from '@/lib/url';
 import { formatDate } from '@/lib/format';
 import type { Post } from '@/lib/posts';
 
-type SearchItem = Pick<Post, 'slug' | 'title' | 'excerpt' | 'tags' | 'date'>;
+type SearchItem = Pick<Post, 'slug' | 'title' | 'excerpt' | 'tags'> & { date: string };
 
 export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[] }) {
   const [q, setQ] = useState('');
@@ -67,7 +67,7 @@ export default function SearchInner({ searchIndex }: { searchIndex: SearchItem[]
               className="group block rounded-xl px-4 py-3 border border-gray-100 dark:border-gray-800 hover:border-brand/50 dark:hover:border-brand/50 hover:shadow-md hover:-translate-y-0.5 transition-all"
             >
               <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-500 mb-1.5">
-                <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
                 {post.tags.slice(0, 3).map((tag) => (
                   <span key={tag} className="badge bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">{tag}</span>
                 ))}
